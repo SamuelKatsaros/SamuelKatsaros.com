@@ -2,7 +2,6 @@
 import type { GetStaticPaths } from 'astro'
 import { getCollection, render } from 'astro:content'
 import readingTime from 'reading-time'
-import type { BreadcrumbList, WithContext } from 'schema-dts'
 
 import ContentWrapper from '@/components/ContentWrapper.astro'
 import BlogLayout from '@/layouts/BlogLayout'
@@ -21,58 +20,31 @@ const { Content, headings } = await render(entry)
 
 const getLastUpdatedTime = client.api.github['last-updated-file']
 const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
-  .$get({ query: { path: `projects/${entry.id}.mdx` } })
+  .$get({ query: { path: `blog/${entry.id}.mdx` } })
   .then(async (res) => {
     if (!res.ok) {
-      console.error('GitHub API request failed:', res.status)
       return {
         latestCommitUrl: '',
         lastUpdatedTime: new Date().toISOString()
       }
     }
-    return {
-      latestCommitUrl: '',
-      lastUpdatedTime: new Date().toISOString()
-    }
+    return res
   })
-  .catch((error) => {
-    console.error('Failed to fetch from GitHub API:', error)
-    return {
-      latestCommitUrl: '',
-      lastUpdatedTime: new Date().toISOString()
-    }
-  })
+  .catch(() => ({
+    latestCommitUrl: '',
+    lastUpdatedTime: new Date().toISOString()
+  }))
 
 const stats = readingTime(entry.body || '')
 
-const breadcrumbSchema: WithContext<BreadcrumbList> = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Projects',
-      item: `${import.meta.env.SITE}/projects/`
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: entry.data.title,
-      item: `${import.meta.env.SITE}/projects/${entry.id}/`
-    }
-  ]
-}
 ---
 
 <BlogLayout
   {...entry.data}
+  id={entry.id}
   headings={headings}
-  slug={entry.id}
   updatedDate={new Date(lastUpdatedTime)}
   latestCommitUrl={latestCommitUrl}
 >
-  <ContentWrapper>
-    <Content />
-  </ContentWrapper>
+  <Content />
 </BlogLayout>
