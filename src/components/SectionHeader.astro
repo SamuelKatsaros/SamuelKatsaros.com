@@ -1,0 +1,54 @@
+---
+import type { JSX, SVGProps } from 'react'
+
+import { getCustomTransition } from '@/lib/customTransition'
+
+export interface Props {
+  icon: (props: SVGProps<SVGSVGElement>) => JSX.Element
+  class?: string
+  forHomePage?: boolean
+  section: string
+  htmlTitle: string
+  htmlDescription: string
+}
+
+const {
+  class: className,
+  forHomePage,
+  icon: Icon,
+  section,
+  htmlTitle: title,
+  htmlDescription: description
+} = Astro.props
+
+const Section = forHomePage ? 'h2' : 'h1'
+const Title = forHomePage ? 'h3' : 'h2'
+const Container = forHomePage ? 'div' : 'section'
+---
+
+<Container class:list={['space-y-6 sm:space-y-8', className]}>
+  <div
+    transition:animate={getCustomTransition()}
+    class='flex w-fit items-center gap-2 rounded-full bg-sky-50 px-4 py-2 text-sky-700'
+  >
+    <Icon />
+    <Section class='text-sm font-medium tracking-wide max-sm:text-xs'
+      >{section}</Section
+    >
+  </div>
+  <Title
+    set:html={title}
+    transition:animate={getCustomTransition(0.05)}
+    class:list={[
+      'mt-3 line-clamp-2 text-xxl font-bold tracking-tight rounded bg-gray-100 px-2 py-1 font-mono text-black',
+      forHomePage
+        ? 'text-[clamp(2rem,7vw,3rem)]'
+        : 'text-[clamp(2rem,7vw,3.25rem)]'
+    ]}
+  />
+  <p
+    class='text-gray-600 max-md:text-sm'
+    transition:animate={getCustomTransition(0.1)}
+    set:html={description}
+  />
+</Container>

@@ -1,0 +1,50 @@
+---
+import { ArrowRight } from '@icons/ArrowRight'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SEO from '@/components/SEO.astro'
+import { getCustomTransition } from '@/lib/customTransition'
+import Decorator from './_components/Decorator.astro'
+---
+
+<BaseLayout class='text-center'>
+  <SEO
+    title='404: Not Found'
+    description="Hmmmm, can't find what you're looking for? Very Amory-Blaine-esque of you."
+    slot='seo'
+  />
+  <Decorator slot='decorator' />
+  <section
+    class='mt-16 flex min-h-[480px] flex-col items-center justify-center'
+  >
+    <div
+      class='w-fit rounded-2xl border-2 border-gray-200 bg-gradient-to-b from-gray-50 to-gray-100 p-3'
+      transition:animate={getCustomTransition()}
+    >
+      <img 
+        src="/favicon.ico" 
+        alt="404 Icon" 
+        class="size-16"
+      />
+    </div>
+    <h1
+      class='mt-8 text-[clamp(2rem,5vw,4rem)] font-semibold leading-none tracking-tight text-gray-900'
+      transition:animate={getCustomTransition(0.05)}
+    >
+      404: Not Found
+    </h1>
+    <p
+      class='mt-4 leading-relaxed text-gray-600 max-sm:text-sm'
+      transition:animate={getCustomTransition(0.1)}
+    >
+      Hmmmm, can't find what you're looking for?<br class='max-sm:hidden' />
+      Very Amory-Blaine-esque of you.
+    </p>
+    <a 
+      href="/"
+      class="mt-8 inline-flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 transition-colors"
+    >
+      <ArrowRight className="size-4 -scale-x-100" />
+      Return Home
+    </a>
+  </section>
+</BaseLayout>

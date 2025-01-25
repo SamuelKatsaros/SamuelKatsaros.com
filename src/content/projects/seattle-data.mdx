@@ -1,0 +1,88 @@
+---
+year: 2024
+title: 'Project Seattle: Automated Building Permit Sourcing'
+htmlTitle: 'Project Seattle: Automated Building\nPermit Sourcing'
+description: 'A Python application that automates the collection of Seattle construction permit data to identify new business opportunities.'
+heroImage: '../../assets/project_seattle_data.png'
+links:
+  - name: 'GitHub'
+    icon: 'Github'
+    url: 'https://github.com/SamuelKatsaros/SeattleData'
+---
+
+import GithubCard from '@/components/GithubCard.astro'
+
+## Overview
+
+Built for Augr Inc., a Private Equity firm, this Python application automates the collection and processing of construction permit data from Seattle's Open Data API. The system enables us to work at the edge of data, identifying and acting on new construction opportunities before competitors.
+
+## The Challenge
+
+In the competitive landscape of private equity and real estate, being first to identify new opportunities can make the difference between securing or losing a deal. Traditional methods of monitoring building permits are:
+
+- Manual and time-consuming
+- Prone to missing opportunities
+- Often delayed by days or weeks
+- Difficult to scale
+
+## The Solution
+
+Seattle Data solves these challenges by providing:
+
+1. **Automated Data Collection**: Fetches construction permit data every 6 hours
+2. **Google Sheets Integration**: Seamless sharing of data across teams
+3. **Configurable Filtering**: Customizable criteria for permit types and status
+4. **Timestamp Tracking**: Detailed monitoring of all permit activities
+
+## Tech Stack
+
+- **Python**: Core application logic and API integration
+- **Google Sheets API**: Data storage and team collaboration
+- **Seattle Gov API**: Primary data source
+- **Environment Variables**: Secure configuration management
+
+## Key Features
+
+### Real-time Data Access
+The application maintains a constant connection to Seattle's Open Data API, ensuring we never miss new permits as they're filed.
+
+### Intelligent Filtering
+Configurable filters allow us to focus on:
+- Specific permit types
+- Project values above certain thresholds
+- Geographic areas of interest
+- Project status and timeline
+
+### Automated Reporting
+Integration with Google Sheets provides:
+- Real-time updates
+- Collaborative access
+- Custom formatting
+- Historical tracking
+
+## Future Extensions
+
+The system is designed for extensibility, with planned features including:
+
+- Email notifications for high-priority permits
+- Automated outreach to permit holders
+- Integration with additional data sources
+- Machine learning for opportunity scoring
+- Custom filtering and processing logic
+
+## Repository
+
+<div className='not-prose'>
+  <GithubCard owner='SamuelKatsaros' repository='SeattleData' />
+</div>
+
+## Impact
+
+This tool has transformed how Augr Inc. identifies and pursues new business opportunities, providing:
+
+- Earlier access to potential deals
+- Reduced manual monitoring time
+- Improved decision-making through data
+- Competitive advantage in the market
+
+By automating the permit monitoring process, we've significantly improved our ability to identify and act on new opportunities in the Seattle market.

@@ -1,0 +1,9 @@
+---
+import client from '@/lib/client'
+
+import BentoItemNowPlayingReact from './BentoItemNowPlaying'
+
+const initialData = await client.api.spotify.$get().then((res) => res.json())
+---
+
+<BentoItemNowPlayingReact initialData={initialData} client:only='react' />
