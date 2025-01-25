@@ -25,15 +25,23 @@ const getLastUpdatedTime = client.api.github['last-updated-file']
 const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
   .$get({ query: { path: `blog/${entry.id}.mdx` } })
   .then(async (res) => {
-    try {
-      const text = await res.text()
-      return JSON.parse(text)
-    } catch (error) {
-      console.error('Failed to parse GitHub API response:', error)
+    if (!res.ok) {
+      console.error('GitHub API request failed:', res.status)
       return {
         latestCommitUrl: '',
         lastUpdatedTime: new Date().toISOString()
       }
+    }
+    return {
+      latestCommitUrl: '',
+      lastUpdatedTime: new Date().toISOString()
+    }
+  })
+  .catch((error) => {
+    console.error('Failed to fetch from GitHub API:', error)
+    return {
+      latestCommitUrl: '',
+      lastUpdatedTime: new Date().toISOString()
     }
   })
 
