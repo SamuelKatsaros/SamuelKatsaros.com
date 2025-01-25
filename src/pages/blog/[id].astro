@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro'
-import { getCollection, render } from 'astro:content'
+import { getCollection } from 'astro:content'
 import readingTime from 'reading-time'
 
 import BlogLayout from '@/layouts/BlogLayout'
@@ -15,7 +15,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths
 
 const { entry } = Astro.props
-const { Content, headings } = await render(entry)
+const { Content } = await entry.render()
 
 const response = await client.api.github['last-updated-file']
   .$get({ query: { path: `blog/${entry.id}.mdx` } })
@@ -31,7 +31,7 @@ const stats = readingTime(entry.body ?? '')
 <BlogLayout
   {...entry.data}
   id={entry.id}
-  headings={headings}
+  headings={[]}
   updatedDate={new Date(lastUpdatedTime)}
   latestCommitUrl={latestCommitUrl}
   readingTime={Math.ceil(stats.minutes)}

@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro'
-import { getCollection, render } from 'astro:content'
+import { getCollection } from 'astro:content'
 
 import ProjectLayout from '@/layouts/ProjectLayout'
 import client from '@/lib/client'
@@ -14,7 +14,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths
 
 const { entry } = Astro.props
-const { Content, headings } = await render(entry)
+const { Content } = await entry.render()
 
 const response = await client.api.github['last-updated-file']
   .$get({ query: { path: `projects/${entry.id}.mdx` } })
@@ -28,7 +28,7 @@ const lastUpdatedTime = data?.lastUpdatedTime ?? new Date().toISOString()
 <ProjectLayout
   {...entry.data}
   slug={entry.id}
-  headings={headings}
+  headings={[]}
   updatedDate={new Date(lastUpdatedTime)}
   latestCommitUrl={latestCommitUrl}
 >
