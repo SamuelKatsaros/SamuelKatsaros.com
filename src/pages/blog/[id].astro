@@ -24,7 +24,17 @@ const { Content, headings } = await render(entry)
 const getLastUpdatedTime = client.api.github['last-updated-file']
 const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
   .$get({ query: { path: `blog/${entry.id}.mdx` } })
-  .then((res) => res.json())
+  .then((res) => {
+    try {
+      return res.json()
+    } catch (error) {
+      console.error('Failed to parse GitHub API response:', error)
+      return {
+        latestCommitUrl: '',
+        lastUpdatedTime: new Date().toISOString()
+      }
+    }
+  })
 
 const { minutes } = readingTime(entry.body!)
 ---
