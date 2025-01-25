@@ -1,5 +1,5 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
+import type { GetStaticPaths } from 'astro'
 import { getCollection, render } from 'astro:content'
 import readingTime from 'reading-time'
 import type { BreadcrumbList, WithContext } from 'schema-dts'
@@ -8,8 +8,6 @@ import ContentWrapper from '@/components/ContentWrapper.astro'
 import ProjectLayout from '@/layouts/ProjectLayout'
 import client from '@/lib/client'
 import { getProjectSchema } from '@/lib/structuredData'
-
-interface Props extends InferGetStaticPropsType<typeof getStaticPaths> {}
 
 export const getStaticPaths = (async () => {
   const projectEntries = await getCollection('projects')
@@ -20,7 +18,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths
 
 const { entry } = Astro.props
-const { Content } = await render(entry)
+const { Content, headings } = await render(entry)
 
 const getLastUpdatedTime = client.api.github['last-updated-file']
 const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
@@ -70,15 +68,15 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
 ---
 
 <ProjectLayout
-  title={entry.data.title}
-  description={entry.data.description}
-  image={entry.data.heroImage}
-  lastUpdatedTime={lastUpdatedTime}
+  {...entry.data}
+  headings={headings}
+  slug={entry.id}
+  updatedDate={new Date(lastUpdatedTime)}
   latestCommitUrl={latestCommitUrl}
   readingTime={Math.ceil(stats.minutes)}
   schema={breadcrumbSchema}
 >
-  <ContentWrapper content={entry.body || ''}>
+  <ContentWrapper>
     <Content />
   </ContentWrapper>
 </ProjectLayout>

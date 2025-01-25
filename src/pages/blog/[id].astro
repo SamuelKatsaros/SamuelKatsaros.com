@@ -5,19 +5,19 @@ import readingTime from 'reading-time'
 import type { BreadcrumbList, WithContext } from 'schema-dts'
 
 import ContentWrapper from '@/components/ContentWrapper.astro'
-import ProjectLayout from '@/layouts/ProjectLayout'
+import BlogLayout from '@/layouts/BlogLayout'
 import client from '@/lib/client'
 
 export const getStaticPaths = (async () => {
-  const projectEntries = await getCollection('projects')
-  return projectEntries.map((entry) => ({
+  const blogEntries = await getCollection('blog')
+  return blogEntries.map((entry) => ({
     params: { id: entry.id },
     props: { entry }
   }))
 }) satisfies GetStaticPaths
 
 const { entry } = Astro.props
-const { Content } = await render(entry)
+const { Content, headings } = await render(entry)
 
 const getLastUpdatedTime = client.api.github['last-updated-file']
 const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
@@ -65,16 +65,14 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
 }
 ---
 
-<ProjectLayout
-  title={entry.data.title}
-  description={entry.data.description}
-  heroImage={entry.data.heroImage}
-  lastUpdatedTime={lastUpdatedTime}
+<BlogLayout
+  {...entry.data}
+  headings={headings}
+  slug={entry.id}
+  updatedDate={new Date(lastUpdatedTime)}
   latestCommitUrl={latestCommitUrl}
-  readingTime={Math.ceil(stats.minutes)}
-  schema={breadcrumbSchema}
 >
   <ContentWrapper>
     <Content />
   </ContentWrapper>
-</ProjectLayout>
+</BlogLayout>
