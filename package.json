@@ -76,6 +76,7 @@
     "prettier": "^3.4.2",
     "prettier-config-standard": "^7.0.0",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.9"
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "tailwindcss-highlights": "^1.0.0"
   }
 }
