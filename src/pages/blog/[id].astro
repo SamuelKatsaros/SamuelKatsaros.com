@@ -3,7 +3,6 @@ import type { GetStaticPaths } from 'astro'
 import { getCollection, render } from 'astro:content'
 import readingTime from 'reading-time'
 
-import ContentWrapper from '@/components/ContentWrapper.astro'
 import BlogLayout from '@/layouts/BlogLayout'
 import client from '@/lib/client'
 
@@ -21,8 +20,9 @@ const { Content, headings } = await render(entry)
 const response = await client.api.github['last-updated-file']
   .$get({ query: { path: `blog/${entry.id}.mdx` } })
 
-const { latestCommitUrl = '', lastUpdatedTime = new Date().toISOString() } = 
-  response.ok ? await response.json() : {}
+const data = response.ok ? await response.json() : null
+const latestCommitUrl = data?.latestCommitUrl ?? ''
+const lastUpdatedTime = data?.lastUpdatedTime ?? new Date().toISOString()
 
 const stats = readingTime(entry.body || '')
 
