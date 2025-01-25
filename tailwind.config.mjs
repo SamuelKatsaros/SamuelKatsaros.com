@@ -166,5 +166,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography'), require('tailwindcss-highlights')]
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')]
 }
