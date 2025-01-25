@@ -7,7 +7,7 @@ import type { BreadcrumbList, WithContext } from 'schema-dts'
 import ContentWrapper from '@/components/ContentWrapper.astro'
 import ProjectLayout from '@/layouts/ProjectLayout'
 import client from '@/lib/client'
-import { getProjectSchema, projectWebsite } from '@/lib/structuredData'
+import { getProjectSchema } from '@/lib/structuredData'
 
 interface Props extends InferGetStaticPropsType<typeof getStaticPaths> {}
 
@@ -20,7 +20,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths
 
 const { entry } = Astro.props
-const { Content, headings } = await render(entry)
+const { Content } = await render(entry)
 
 const getLastUpdatedTime = client.api.github['last-updated-file']
 const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
@@ -46,11 +46,9 @@ const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
     }
   })
 
-const stats = readingTime(entry.body)
+const stats = readingTime(entry.body || '')
 
-const schema: WithContext<BreadcrumbList> = getProjectSchema(entry)
-
-const breadcrumbsStructuredData: WithContext<BreadcrumbList> = {
+const breadcrumbSchema: WithContext<BreadcrumbList> = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
@@ -69,28 +67,18 @@ const breadcrumbsStructuredData: WithContext<BreadcrumbList> = {
   ]
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [schema, breadcrumbsStructuredData, projectWebsite]
-}
 ---
 
 <ProjectLayout
   title={entry.data.title}
   description={entry.data.description}
-  image={entry.data.image}
+  image={entry.data.heroImage}
   lastUpdatedTime={lastUpdatedTime}
   latestCommitUrl={latestCommitUrl}
-  readingTime={stats.text}
-  schema={schema}
+  readingTime={Math.ceil(stats.minutes)}
+  schema={breadcrumbSchema}
 >
-  <script
-    is:inline
-    type='application/ld+json'
-    set:html={JSON.stringify(jsonLd)}
-    slot='head'
-  />
-  <ContentWrapper>
+  <ContentWrapper content={entry.body || ''}>
     <Content />
   </ContentWrapper>
 </ProjectLayout>
