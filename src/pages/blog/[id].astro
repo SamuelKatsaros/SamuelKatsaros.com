@@ -15,7 +15,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths
 
 const { entry } = Astro.props
-const { Content, headings } = await render(entry)
+const { Content, headings } = await entry.render()
 
 const response = await client.api.github['last-updated-file']
   .$get({ query: { path: `blog/${entry.id}.mdx` } })
@@ -24,7 +24,7 @@ const data = response.ok ? await response.json() : null
 const latestCommitUrl = data?.latestCommitUrl ?? ''
 const lastUpdatedTime = data?.lastUpdatedTime ?? new Date().toISOString()
 
-const stats = readingTime(entry.body || '')
+const stats = readingTime(entry.body)
 
 ---
 
