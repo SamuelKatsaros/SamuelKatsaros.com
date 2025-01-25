@@ -26,9 +26,10 @@ const { Content, headings } = await render(entry)
 const getLastUpdatedTime = client.api.github['last-updated-file']
 const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
   .$get({ query: { path: `projects/${entry.id}.mdx` } })
-  .then((res) => {
+  .then(async (res) => {
     try {
-      return res.json()
+      const text = await res.text()
+      return JSON.parse(text)
     } catch (error) {
       console.error('Failed to parse GitHub API response:', error)
       return {
