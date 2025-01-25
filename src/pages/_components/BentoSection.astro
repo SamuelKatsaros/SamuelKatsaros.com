@@ -12,7 +12,6 @@ import BentoItemCTA from './bento/BentoItemCTA'
 import BentoItemFeaturedWork from './bento/BentoItemFeaturedWork'
 import BentoItemGithubActivity from './bento/BentoItemGithubActivity'
 import BentoItemMapLocation from './bento/BentoItemMapLocation'
-import BentoItemNowPlaying from './bento/BentoItemNowPlaying'
 import BentoItemTechStack from './bento/BentoItemTechStack'
 import BentoItemTypingSpeed from './bento/BentoItemTypingSpeed'
 
@@ -106,14 +105,13 @@ const socialMedias = [
     <BentoItemCTA />
   </BentoCard>
 
-  <!-- Spotify & Monkeytype -->
+  <!-- Monkeytype -->
   <BentoCard
     className={cn(
       'col-start-[24] col-end-[37] row-start-4 row-end-[9]',
       'max-lg:col-start-4 max-lg:col-end-7 max-lg:row-start-4 max-lg:row-end-6'
     )}
   >
-    <!-- TODO -->
     <BentoItemTypingSpeed server:defer>
       <p class='p-4' slot='fallback'>Loading data...</p>
     </BentoItemTypingSpeed>
