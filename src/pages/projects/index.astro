@@ -10,7 +10,9 @@ import { projectMetaData } from '@/lib/metaData'
 
 import Decorator from './_components/Decorator.astro'
 
+console.log('Loading projects for index page')
 const projects = await getCollection('projects')
+console.log('Loaded project IDs:', projects.map(p => p.id))
 ---
 
 <BaseLayout>
