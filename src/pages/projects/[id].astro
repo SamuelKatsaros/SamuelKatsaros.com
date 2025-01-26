@@ -13,7 +13,6 @@ interface Props extends InferGetStaticPropsType<typeof getStaticPaths> {}
 
 export const getStaticPaths = (async () => {
   const projectEntries = await getCollection('projects')
-  console.log('Available project IDs:', projectEntries.map(e => e.id))
 
   return projectEntries.map((entry) => ({
     params: { id: entry.id },
@@ -22,14 +21,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths
 
 const { entry } = Astro.props
-console.log('Attempting to render project:', entry.id)
-
-try {
-  const { Content, headings } = await render(entry)
-} catch (error) {
-  console.error('Error rendering project:', entry.id, error)
-  throw error;
-}
+const { Content, headings } = await render(entry)
 
 // Only fetch GitHub data if the project has a githubPath
 let lastUpdatedTime = entry.data.updatedDate || new Date()
