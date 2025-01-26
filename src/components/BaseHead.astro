@@ -67,10 +67,11 @@ import { AstroFont } from 'astro-font'
 
 <!-- Google Analytics -->
 <script
+  is:inline
   type="text/partytown"
   src="https://www.googletagmanager.com/gtag/js?id=G-RSS4LBX33E"
 ></script>
-<script type="text/partytown">
+<script is:inline type="text/partytown">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
