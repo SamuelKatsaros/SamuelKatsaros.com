@@ -38,6 +38,11 @@ export default defineConfig({
     defaultStrategy: 'load'
   },
 
+  image: {
+    domains: ['*'],
+    remotePatterns: [{ protocol: 'https' }]
+  },
+
   env: {
     schema: {
       MAPTILER_API_KEY: envField.string({
@@ -59,7 +64,7 @@ export default defineConfig({
       // SPOTIFY_REFRESH_TOKEN: envField.string({
       //   context: 'server',
       //   access: 'secret'
-      // }),
+      // }),`
       MONKEYTYPE_API_KEY: envField.string({
         context: 'server',
         access: 'secret'
