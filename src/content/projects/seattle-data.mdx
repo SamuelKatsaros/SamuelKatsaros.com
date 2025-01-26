@@ -1,88 +1,69 @@
 ---
 year: 2024
-title: 'Project Seattle: Automated Building Permit Sourcing'
-htmlTitle: 'Project Seattle: Automated Building Permit Sourcing'
-description: 'A Python application that automates the collection of Seattle construction permit data to identify new business opportunities.'
-heroImage: '../../assets/project_seattle_data.png'
-links:
-  - name: 'GitHub'
-    icon: 'Github'
-    url: 'https://github.com/SamuelKatsaros/SeattleData'
+title: 'Bookmarked Android: A Simple Viewer for My Bookmarked Content'
+description: 'Built with Jetpack Compose, it aims to offer an improved reading experience on my laggy phone.'
+heroImage: '../../assets/project_bookmarked_android.png'
+heroImageAlign: 'center'
 ---
 
 import GithubCard from '@/components/GithubCard.astro'
+import TweetCard from '@/components/TweetCard/TweetCard.astro'
 
 ## Overview
 
-Built for Augr Inc., a Private Equity firm, this Python application automates the collection and processing of construction permit data from Seattle's Open Data API. The system enables us to work at the edge of data, identifying and acting on new construction opportunities before competitors.
+This project serves as a follow-up to my original Bookmarked project. While it stands independently, feel free to explore the [original project](/projects/bookmarked) for context.
 
-## The Challenge
+Bookmarked Android is a native Android client designed to view my collection of bookmarked tweets. Built with Jetpack Compose, it focuses on delivering an improved reading experience, making it easier and more enjoyable to revisit saved tweets on my device.
 
-In the competitive landscape of private equity and real estate, being first to identify new opportunities can make the difference between securing or losing a deal. Traditional methods of monitoring building permits are:
+## Goals and Motivation
 
-- Manual and time-consuming
-- Prone to missing opportunities
-- Often delayed by days or weeks
-- Difficult to scale
+I rely heavily on Notion for desktop use, but using it on my six-year-old Android phone has always been frustrating due to its sluggish performance—an understandable _limitation given my phone’s age._
 
-## The Solution
+Since I often revisit my bookmarked tweets, it felt much more practical to have an efficient way to access them directly on my phone.
 
-Seattle Data solves these challenges by providing:
+I saw two potential solutions:
 
-1. **Automated Data Collection**: Fetches construction permit data every 6 hours
-2. **Google Sheets Integration**: Seamless sharing of data across teams
-3. **Configurable Filtering**: Customizable criteria for permit types and status
-4. **Timestamp Tracking**: Detailed monitoring of all permit activities
+- Buy a new phone.
+- Build my own bookmarked client for my current phone.
 
-## Tech Stack
+While the first option was tempting, my wallet had other plans. During my research, I discovered that Notion is built with React Native. Inspired by this, I decided to get hands-on experience building an app with Jetpack Compose while solving my personal pain point.
 
-- **Python**: Core application logic and API integration
-- **Google Sheets API**: Data storage and team collaboration
-- **Seattle Gov API**: Primary data source
-- **Environment Variables**: Secure configuration management
+## Tech Stack Used
 
-## Key Features
+- **Jetpack Compose**: Used as the framework for building the app, providing a modern and declarative UI toolkit for Android.
+- **Hono**: A lightweight and fast framework for fetching and parsing data from the Notion API.
 
-### Real-time Data Access
-The application maintains a constant connection to Seattle's Open Data API, ensuring we never miss new permits as they're filed.
+## Features
 
-### Intelligent Filtering
-Configurable filters allow us to focus on:
-- Specific permit types
-- Project values above certain thresholds
-- Geographic areas of interest
-- Project status and timeline
+_Nothing too fancy here_—just a simple read-only app with the following features:
 
-### Automated Reporting
-Integration with Google Sheets provides:
-- Real-time updates
-- Collaborative access
-- Custom formatting
-- Historical tracking
+- List View: Displays a collection of bookmarked tweets.
+- Infinite Scrolling: Seamless loading of tweets as you scroll.
+- Filtering: Options to filter by tweets, threads, or tags.
+- Full-Text Search: Powered by the Notion API for efficient keyword searches.
 
-## Future Extensions
+## Challenges and How I Dealt with Them
 
-The system is designed for extensibility, with planned features including:
+> Parsing JSON data is unbelievably hard
 
-- Email notifications for high-priority permits
-- Automated outreach to permit holders
-- Integration with additional data sources
-- Machine learning for opportunity scoring
-- Custom filtering and processing logic
+Since this was my first time using Jetpack Compose and Kotlin, I initially struggled with parsing the complex response structure from the Notion API. The deeply nested JSON objects made it difficult to directly fetch and process the data on the client side.
 
-## Repository
+When the frustration peaked, I decided to involve a tool I was more familiar with: JavaScript. I built a lightweight backend using Hono.js to fetch and preprocess data from the Notion API. This backend simplified the JSON structure into a more consumable format, allowing the Android client to handle it with ease.
 
-<div className='not-prose'>
-  <GithubCard owner='SamuelKatsaros' repository='SeattleData' />
+## Demo
+
+<TweetCard tweetId='1847967261589639599' />
+<TweetCard tweetId='1847968430248316939' class='mt-8' />
+
+## Repositories
+
+<div className='not-prose space-y-4'>
+  <GithubCard owner='jestsee' repository='bookmarked-android' />
+  <GithubCard owner='jestsee' repository='bookmarked-api-hono' />
 </div>
 
-## Impact
+## Outro
 
-This tool has transformed how Augr Inc. identifies and pursues new business opportunities, providing:
+As a JavaScript developer, I still found Kotlin challenging to work with, despite its syntax being somewhat similar to Flutter, which I have experience with. Although the syntax felt familiar, Kotlin's unique concepts and features required a bit of adjustment.
 
-- Earlier access to potential deals
-- Reduced manual monitoring time
-- Improved decision-making through data
-- Competitive advantage in the market
-
-By automating the permit monitoring process, we've significantly improved our ability to identify and act on new opportunities in the Seattle market.
+And as expected, the app runs smoothly on my Android phone 🥳.
