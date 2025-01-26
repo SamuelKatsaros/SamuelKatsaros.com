@@ -15,6 +15,7 @@ export const blog = defineCollection({
       updatedDate: z.coerce.date().optional(),
       readingTime: z.number().optional(),
       wordsCount: z.number().optional(),
+      githubPath: z.string().optional(),
       latestCommitUrl: z.string().optional()
     })
 })
@@ -43,7 +44,8 @@ export const projects = defineCollection({
         readingTime: z.number().optional(),
         wordsCount: z.number().optional(),
         updatedDate: z.coerce.date().optional(),
-        latestCommitUrl: z.string().optional()
+        latestCommitUrl: z.string().optional(),
+        githubPath: z.string().optional()
       })
       .transform((data) => ({
         ...data,

@@ -23,10 +23,22 @@ export const getStaticPaths = (async () => {
 const { entry } = Astro.props
 const { Content, headings } = await render(entry)
 
-const getLastUpdatedTime = client.api.github['last-updated-file']
-const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
-  .$get({ query: { path: `projects/${entry.id}.mdx` } })
-  .then((res) => res.json())
+// Only fetch GitHub data if the project has a githubPath
+let lastUpdatedTime = entry.data.updatedDate || new Date()
+let latestCommitUrl = ''
+
+if (entry.data.githubPath) {
+  const getLastUpdatedTime = client.api.github['last-updated-file']
+  const response = await getLastUpdatedTime
+    .$get({ query: { path: entry.data.githubPath } })
+    .then((res) => res.json())
+    .catch(() => null)
+
+  if (response) {
+    lastUpdatedTime = new Date(response.lastUpdatedTime)
+    latestCommitUrl = response.latestCommitUrl
+  }
+}
 
 const { minutes, words } = readingTime(entry.body!)
 
