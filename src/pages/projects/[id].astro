@@ -11,6 +11,8 @@ import { getProjectSchema, projectWebsite } from '@/lib/structuredData'
 
 interface Props extends InferGetStaticPropsType<typeof getStaticPaths> {}
 
+export const prerender = true;
+
 export const getStaticPaths = (async () => {
   const projectEntries = await getCollection('projects')
 

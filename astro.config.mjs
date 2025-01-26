@@ -10,7 +10,12 @@ import { defineConfig, envField } from 'astro/config'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 
-let adapter = vercel()
+let adapter = vercel({
+  webAnalytics: {
+    enabled: true
+  },
+  imageService: true
+})
 
 if (process.argv[3] === '--node' || process.argv[4] === '--node') {
   adapter = node({ mode: 'standalone' })
