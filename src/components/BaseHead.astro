@@ -65,4 +65,16 @@ import { AstroFont } from 'astro-font'
   data-website-id='171092c9-481f-43cd-865f-97d8b52b886f'
   data-domains='samuelkatsaros.com,www.samuelkatsaros.com'></script>
 
+<!-- Google Analytics -->
+<script
+  type="text/partytown"
+  src="https://www.googletagmanager.com/gtag/js?id=G-RSS4LBX33E"
+></script>
+<script type="text/partytown">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RSS4LBX33E');
+</script>
+
 <ClientRouter fallback='swap' />

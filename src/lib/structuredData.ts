@@ -26,7 +26,7 @@ export const personSchema: WithContext<Person> = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Samuel E Katsaros',
-  url: 'https://samuelekatsaros.com',
+  url: 'https://samuelkatsaros.com',
   // image: `${import.meta.env.SITE}${avatar.src}`,
   sameAs: [
     'https://www.x.com/samuelkatsaros',

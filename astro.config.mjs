@@ -122,6 +122,10 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false
     }),
-    partytown()
+    partytown({
+      config: {
+        forward: ['dataLayer.push'],
+      }
+    })
   ]
 })
