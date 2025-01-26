@@ -11,25 +11,41 @@ import { getProjectSchema, projectWebsite } from '@/lib/structuredData'
 
 interface Props extends InferGetStaticPropsType<typeof getStaticPaths> {}
 
-export const getStaticPaths = (async () => {
-  const projectEntries = await getCollection('projects')
+export const prerender = true
 
+export const getStaticPaths = async () => {
+  const projectEntries = await getCollection('projects')
   return projectEntries.map((entry) => ({
     params: { id: entry.id },
     props: { entry }
   }))
-}) satisfies GetStaticPaths
+}
 
 const { entry } = Astro.props
 const { Content, headings } = await render(entry)
 
-const getLastUpdatedTime = client.api.github['last-updated-file']
-const { latestCommitUrl, lastUpdatedTime } = await getLastUpdatedTime
-  .$get({ query: { path: `projects/${entry.id}.mdx` } })
-  .then((res) => res.json())
+// Default to the updatedDate in frontmatter, or just now()
+let lastUpdatedTime = entry.data.updatedDate || new Date()
+let latestCommitUrl = ''
+
+// Only run the GitHub fetch if you have a path set in frontmatter (similar to blog)
+if (entry.data.githubPath) {
+  try {
+    const getLastUpdatedTime = client.api.github['last-updated-file']
+    const response = await getLastUpdatedTime
+      .$get({ query: { path: entry.data.githubPath } })
+      .then((r) => r.ok ? r.json() : null)
+
+    if (response) {
+      lastUpdatedTime = new Date(response.lastUpdatedTime)
+      latestCommitUrl = response.latestCommitUrl
+    }
+  } catch (error) {
+    console.error('Error fetching GitHub data:', error)
+  }
+}
 
 const { minutes, words } = readingTime(entry.body!)
-
 const projectStructuredData = getProjectSchema(entry)
 
 const breadcrumbsStructuredData: WithContext<BreadcrumbList> = {
@@ -62,15 +78,15 @@ const jsonLd = {
   slug={entry.id}
   readingTime={Math.ceil(minutes)}
   wordsCount={words}
-  updatedDate={new Date(lastUpdatedTime)}
+  updatedDate={lastUpdatedTime}
   latestCommitUrl={latestCommitUrl}
   {...entry.data}
 >
   <script
     is:inline
-    type='application/ld+json'
+    type="application/ld+json"
     set:html={JSON.stringify(jsonLd)}
-    slot='head'
+    slot="head"
   />
   <ContentWrapper content={Content} />
 </ProjectLayout>
