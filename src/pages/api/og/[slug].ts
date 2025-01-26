@@ -1,5 +1,3 @@
-export const prerender = true
-
 import { ImageResponse } from '@vercel/og'
 import type {
   APIRoute,

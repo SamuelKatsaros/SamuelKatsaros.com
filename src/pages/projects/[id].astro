@@ -11,22 +11,13 @@ import { getProjectSchema, projectWebsite } from '@/lib/structuredData'
 
 interface Props extends InferGetStaticPropsType<typeof getStaticPaths> {}
 
-export const prerender = true;
-
 export const getStaticPaths = (async () => {
   const projectEntries = await getCollection('projects')
 
-  return projectEntries.map((entry) => {
-    try {
-      return {
-        params: { id: entry.id },
-        props: { entry }
-      }
-    } catch (error) {
-      console.error(`Error processing project ${entry.id}:`, error)
-      return null
-    }
-  }).filter(Boolean)
+  return projectEntries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry }
+  }))
 }) satisfies GetStaticPaths
 
 const { entry } = Astro.props
