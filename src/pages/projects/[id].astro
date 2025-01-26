@@ -11,8 +11,11 @@ import { getProjectSchema, projectWebsite } from '@/lib/structuredData'
 
 interface Props extends InferGetStaticPropsType<typeof getStaticPaths> {}
 
+export const prerender = true;
+
 export const getStaticPaths = (async () => {
   const projectEntries = await getCollection('projects')
+  console.log('Available project IDs:', projectEntries.map(e => e.id))
 
   return projectEntries.map((entry) => ({
     params: { id: entry.id },
@@ -20,69 +23,75 @@ export const getStaticPaths = (async () => {
   }))
 }) satisfies GetStaticPaths
 
-const { entry } = Astro.props
-const { Content, headings } = await render(entry)
+try {
+  const { entry } = Astro.props
+  console.log('Attempting to render project:', entry.id)
+  const { Content, headings } = await render(entry)
 
-// Only fetch GitHub data if the project has a githubPath
-let lastUpdatedTime = entry.data.updatedDate || new Date()
-let latestCommitUrl = ''
+  // Only fetch GitHub data if the project has a githubPath
+  let lastUpdatedTime = entry.data.updatedDate || new Date()
+  let latestCommitUrl = ''
 
-if (entry.data.githubPath) {
-  const getLastUpdatedTime = client.api.github['last-updated-file']
-  const response = await getLastUpdatedTime
-    .$get({ query: { path: entry.data.githubPath } })
-    .then((res) => res.json())
-    .catch(() => null)
+  if (entry.data.githubPath) {
+    const getLastUpdatedTime = client.api.github['last-updated-file']
+    const response = await getLastUpdatedTime
+      .$get({ query: { path: entry.data.githubPath } })
+      .then((res) => res.json())
+      .catch(() => null)
 
-  if (response) {
-    lastUpdatedTime = new Date(response.lastUpdatedTime)
-    latestCommitUrl = response.latestCommitUrl
-  }
-}
-
-const { minutes, words } = readingTime(entry.body!)
-
-const projectStructuredData = getProjectSchema(entry)
-
-const breadcrumbsStructuredData: WithContext<BreadcrumbList> = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Projects',
-      item: `${import.meta.env.SITE}/projects/`
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: entry.data.title,
-      item: `${import.meta.env.SITE}/projects/${entry.id}/`
+    if (response) {
+      lastUpdatedTime = new Date(response.lastUpdatedTime)
+      latestCommitUrl = response.latestCommitUrl
     }
-  ]
-}
+  }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [projectStructuredData, breadcrumbsStructuredData, projectWebsite]
+  const { minutes, words } = readingTime(entry.body!)
+
+  const projectStructuredData = getProjectSchema(entry)
+
+  const breadcrumbsStructuredData: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Projects',
+        item: `${import.meta.env.SITE}/projects/`
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: entry.data.title,
+        item: `${import.meta.env.SITE}/projects/${entry.id}/`
+      }
+    ]
+  }
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [projectStructuredData, breadcrumbsStructuredData, projectWebsite]
+  }
+
+  <ProjectLayout
+    headings={headings}
+    slug={entry.id}
+    readingTime={Math.ceil(minutes)}
+    wordsCount={words}
+    updatedDate={new Date(lastUpdatedTime)}
+    latestCommitUrl={latestCommitUrl}
+    {...entry.data}
+  >
+    <script
+      is:inline
+      type='application/ld+json'
+      set:html={JSON.stringify(jsonLd)}
+      slot='head'
+    />
+    <ContentWrapper content={Content} />
+  </ProjectLayout>
+} catch (error) {
+  console.error('Error rendering project:', error)
+  throw error
 }
 ---
-
-<ProjectLayout
-  headings={headings}
-  slug={entry.id}
-  readingTime={Math.ceil(minutes)}
-  wordsCount={words}
-  updatedDate={new Date(lastUpdatedTime)}
-  latestCommitUrl={latestCommitUrl}
-  {...entry.data}
->
-  <script
-    is:inline
-    type='application/ld+json'
-    set:html={JSON.stringify(jsonLd)}
-    slot='head'
-  />
-  <ContentWrapper content={Content} />
-</ProjectLayout>
