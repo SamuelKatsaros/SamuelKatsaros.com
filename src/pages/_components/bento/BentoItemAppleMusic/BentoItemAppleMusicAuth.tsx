@@ -18,19 +18,30 @@ function BentoItemAppleMusicAuth() {
     script.onload = async () => {
       try {
         const response = await fetch('/api/applemusic/token')
+        if (!response.ok) {
+          throw new Error('Failed to fetch token')
+        }
         const { token: developerToken } = await response.json()
+        
+        console.log('Developer Token:', developerToken) // Debug log
 
-        await window.MusicKit.configure({
-          developerToken,
-          app: {
-            name: 'Samuel Katsaros',
-            build: '1.0.0'
-          }
-        })
-        setIsLoaded(true)
+        if (window.MusicKit) {
+          await window.MusicKit.configure({
+            developerToken,
+            app: {
+              name: 'Samuel Katsaros',
+              build: '1.0.0',
+              id: 'media.com.samuelkatsaros'
+            }
+          })
+          console.log('MusicKit configured successfully')
+          setIsLoaded(true)
+        } else {
+          throw new Error('MusicKit not found')
+        }
       } catch (error) {
         console.error('Setup failed:', error)
-        setError('Failed to setup MusicKit')
+        setError(error instanceof Error ? error.message : 'Failed to setup MusicKit')
       }
     }
 
@@ -43,10 +54,10 @@ function BentoItemAppleMusicAuth() {
   const handleAuth = async () => {
     try {
       const music = window.MusicKit.getInstance()
-      const token = await music.authorize()
+      console.log('MusicKit instance:', music) // Debug log
       
-      // Log token to console as suggested in the article
-      console.log('Music User Token:', token)
+      const token = await music.authorize()
+      console.log('User Music Token:', token) // Debug log
 
       const response = await fetch('/api/applemusic/save-token', {
         method: 'POST',
@@ -55,13 +66,14 @@ function BentoItemAppleMusicAuth() {
       })
 
       if (!response.ok) {
-        throw new Error('Failed to save token')
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to save token')
       }
 
       window.location.reload()
     } catch (error) {
       console.error('Authorization failed:', error)
-      setError('Authorization failed')
+      setError(error instanceof Error ? error.message : 'Authorization failed')
     }
   }
 
