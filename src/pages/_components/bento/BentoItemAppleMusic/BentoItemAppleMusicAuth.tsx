@@ -34,7 +34,8 @@ const BentoItemAppleMusicAuth = () => {
                 developerToken: data.token,
                 app: {
                   name: 'Samuel Katsaros',
-                  build: '1.0.0'
+                  build: '1.0.0',
+                  id: 'media.com.samuelkatsaros'
                 }
               })
               console.log('MusicKit configured successfully')
