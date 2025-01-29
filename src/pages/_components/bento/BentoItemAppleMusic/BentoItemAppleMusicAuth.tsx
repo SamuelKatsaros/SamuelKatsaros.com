@@ -69,7 +69,22 @@ const BentoItemAppleMusicAuth = () => {
     try {
       const music = window.MusicKit.getInstance()
       const token = await music.authorize()
-      console.log('Music User Token:', token)
+      
+      // Send token to our backend
+      const response = await fetch('/api/applemusic/save-token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ token })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to save token')
+      }
+
+      // Refresh the page to show the now playing content
+      window.location.reload()
     } catch (error) {
       console.error('Authorization failed:', error)
       setError('Authorization failed')
