@@ -40,8 +40,12 @@ export const GET: APIRoute = async ({ url }) => {
       format: 'pem',
       type: 'pkcs8'
     })
-    const signature = sign('sha256', Buffer.from(`${headerB64}.${payloadB64}`), key)
-    const developerToken = `${headerB64}.${payloadB64}.${signature.toString('base64url')}`
+    const signature = sign(
+      'sha256', 
+      Buffer.from(`${headerB64}.${payloadB64}`), 
+      key
+    )
+        const developerToken = `${headerB64}.${payloadB64}.${signature.toString('base64url')}`
 
     // 2. Optionally fetch Apple Music data
     if (shouldFetchData) {
