@@ -1,9 +1,16 @@
 export default async function getAppleMusicData() {
   try {
+    // First get the developer token
+    const tokenResponse = await fetch('/api/applemusic/token')
+    if (!tokenResponse.ok) {
+      throw new Error('Failed to get developer token')
+    }
+    const { token: developerToken } = await tokenResponse.json()
+
     const response = await fetch('https://api.music.apple.com/v1/me/recent/played/tracks', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${process.env.APPLE_MUSIC_TOKEN}`,
+        'Authorization': `Bearer ${developerToken}`,
         'Music-User-Token': process.env.APPLE_MUSIC_USER_TOKEN || ''
       }
     })
@@ -20,6 +27,7 @@ export default async function getAppleMusicData() {
       }
     }
   } catch (error) {
+    console.error('Apple Music service error:', error)
     throw new Error('Failed to fetch Apple Music data')
   }
 } 
