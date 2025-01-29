@@ -79,5 +79,9 @@
     "prettier-config-standard": "^7.0.0",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.9"
-  }
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "packageManager": "npm@10.2.4"
 }
