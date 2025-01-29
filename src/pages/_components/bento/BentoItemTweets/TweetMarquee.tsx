@@ -9,7 +9,7 @@ const tweets: Tweet[] = [
     author: {
       name: 'Samuel Katsaros',
       username: '@SamuelKatsaros',
-      image: '/public/images/x/xprofile.jpeg'
+      image: '/images/x/xprofile.jpeg'
     }
   },
   {
@@ -18,7 +18,7 @@ const tweets: Tweet[] = [
     author: {
       name: 'Samuel Katsaros',
       username: '@SamuelKatsaros',
-      image: '/public/images/x/xprofile.jpeg'
+      image: '/images/x/xprofile.jpeg'
     }
   },
   {
@@ -27,7 +27,7 @@ const tweets: Tweet[] = [
     author: {
       name: 'Samuel Katsaros',
       username: '@SamuelKatsaros',
-      image: '/public/images/x/xprofile.jpeg'
+      image: '/images/x/xprofile.jpeg'
     }
   },
   {
@@ -36,7 +36,7 @@ const tweets: Tweet[] = [
     author: {
       name: 'Samuel Katsaros',
       username: '@SamuelKatsaros',
-      image: '/public/images/x/xprofile.jpeg'
+      image: '/images/x/xprofile.jpeg'
     }
   }
 ]
