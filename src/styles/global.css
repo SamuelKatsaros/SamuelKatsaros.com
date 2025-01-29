@@ -31,7 +31,6 @@
   .font-heading {
     @apply font-secondary tracking-tight;
   }
-
   .link-hover-animation {
     position: relative;
 
@@ -44,8 +43,8 @@
       width: 0;
       background-image: repeating-linear-gradient(
         to right,
-        var(--dot-color, rgba(255, 255, 255, 0.75)),
-        var(--dot-color, rgba(255, 255, 255, 0.75)) 2px,
+        var(--dot-color, theme(colors.sky.700)),
+        var(--dot-color, theme(colors.sky.700)) 2px,
         transparent 2px,
         transparent 3px
       );
@@ -68,10 +67,9 @@
     color: transparent;
   }
 }
-
 :root {
-  --accent-color-1: #00df73;
-  --accent-color-2: #01fedc;
+  --accent-color-1: #00a3ff;
+  --accent-color-2: #00d4ff;
   --accent-gradient-color: linear-gradient(
     90deg,
     var(--accent-color-1),
@@ -80,7 +78,7 @@
 }
 
 :focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-emerald-300;
+  @apply outline outline-2 outline-offset-2 outline-sky-300;
 }
 
 @keyframes fade-in-bottom {

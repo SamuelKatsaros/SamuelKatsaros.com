@@ -139,7 +139,7 @@ const Tooltip = React.forwardRef<
       >
         <TooltipTrigger onClick={onClick} asChild={triggerAsChild}>
           {withUnderline ? (
-            <span className='underline decoration-zinc-600 decoration-dashed underline-offset-2'>
+            <span className='underline decoration-sky-600 decoration-dashed underline-offset-2'>
               {children}
             </span>
           ) : (
@@ -153,7 +153,7 @@ const Tooltip = React.forwardRef<
                 overrides: {
                   a: {
                     props: {
-                      className: 'text-emerald-400 hover:underline',
+                      className: 'text-sky-400 hover:underline',
                       target: '_blank'
                     }
                   }

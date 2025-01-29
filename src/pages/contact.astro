@@ -1,0 +1,78 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SEO from '@/components/SEO.astro'
+import ContactChat from './_components/contact/ContactChat'
+import { getCustomTransition } from '@/lib/customTransition'
+import { LinkedInIcon } from '@/components/icons/LinkedIn'
+
+Astro.response.headers.set('Cache-Control', 'public, max-age=0')
+---
+
+<BaseLayout>
+  <SEO 
+    title="Contact | Samuel Katsaros"
+    description="Let's chat about projects, opportunities, or just connect"
+    slot="seo"
+  />
+
+  <section class="min-h-screen pt-24 pb-32">
+    <div class="container mx-auto px-4">
+      <div class="mb-12">
+        <div 
+          class="flex w-fit items-center rounded-full gap-3 py-1.5 pl-3 pr-4 border border-zinc-300 bg-zinc-100"
+          transition:animate={getCustomTransition()}
+        >
+          <div class="relative size-3">
+            <div class="absolute size-full animate-ping rounded-full bg-yellow-300 opacity-65"></div>
+            <div class="size-full rounded-full bg-yellow-400"></div>
+          </div>
+          <h3 class="text-sm text-zinc-900">Studying for the GMAT</h3>
+        </div>
+
+        <h1 
+          class="mt-6 text-[clamp(2rem,7vw,3rem)] font-medium leading-[1.05] tracking-tight text-zinc-900"
+          transition:animate={getCustomTransition(0.1)}
+        >
+          Let's Connect
+        </h1>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div transition:animate={getCustomTransition(0.2)}>
+          <ContactChat client:load />
+        </div>
+
+        <div 
+          class="space-y-8 lg:mt-12"
+          transition:animate={getCustomTransition(0.3)}
+        >
+          <div class="rounded-xl border border-zinc-200 bg-zinc-100 p-6">
+            <h3 class="text-lg font-medium text-zinc-900">Quick Links</h3>
+            <div class="mt-4 space-y-4">
+              <a 
+                href="https://linkedin.com/in/samuel-katsaros"
+                target="_blank"
+                rel="noopener noreferrer" 
+                class="flex items-center gap-3 text-zinc-600 hover:text-zinc-900 transition-colors"
+              >
+                <div class="size-8 rounded-full bg-blue-100 flex items-center justify-center">
+                  <svg class="size-4" {...LinkedInIcon} />
+                </div>
+                LinkedIn
+              </a>
+              <!-- Add other quick links similar to your socialMediaData.ts -->
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-zinc-200 bg-zinc-100 p-6">
+            <h3 class="text-lg font-medium text-zinc-900">Office Hours</h3>
+            <p class="mt-2 text-zinc-600">
+              I'm typically available Monday through Friday, 9 AM to 5 PM EST.
+              Response time: within 24 hours.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

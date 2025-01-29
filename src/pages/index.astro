@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import { mainWebsite } from '@/lib/structuredData'
 
 import BlogSection from './_components/BlogSection.astro'
+import BentoSection from './_components/BentoSection.astro'
 import Decorator from './_components/Decorator.astro'
 import HeroSection from './_components/HeroSection.astro'
 import ProjectSection from './_components/ProjectSection.astro'
@@ -17,6 +18,7 @@ import ProjectSection from './_components/ProjectSection.astro'
     slot='head'
   />
   <HeroSection />
+  <BentoSection />
   <ProjectSection />
   <BlogSection />
 </BaseLayout>

@@ -15,12 +15,12 @@ interface Props {
 }
 
 const badgeVariants = cva(
-  'z-10 flex items-center gap-2 rounded-full border border-slate-700 bg-slate-950 shrink-0',
+  'z-10 flex items-center gap-2 rounded-full border border-slate-200 bg-white shrink-0 transition-all duration-300',
   {
     variants: {
       variant: {
-        default: 'py-2 pl-3 pr-4',
-        iconOnly: 'p-2'
+        default: 'py-2 pl-3 pr-4 hover:shadow-[0_0_15px_rgba(14,165,233,0.3)] hover:border-sky-200',
+        iconOnly: 'p-2 hover:shadow-[0_0_15px_rgba(14,165,233,0.3)] hover:border-sky-200'
       }
     },
     defaultVariants: {
@@ -39,7 +39,7 @@ const BentoBadge = ({ icon: Icon, text, className }: Props) => {
       )}
     >
       <Icon className={cn('size-4', className?.icon)} />
-      {!!text && <h3 className='text-sm text-zinc-200'>{text}</h3>}
+      {!!text && <h3 className='text-sm text-slate-800'>{text}</h3>}
     </div>
   )
 }

@@ -96,7 +96,7 @@ const BottomNavigationBar = () => {
             >
               <Icon className='size-6' />
               {firstSegment === href && (
-                <div className='absolute bottom-2 size-1 rounded-full bg-emerald-300'></div>
+                <div className='absolute bottom-2 size-1 rounded-full bg-sky-300'></div>
               )}
             </DockIcon>
           ))}

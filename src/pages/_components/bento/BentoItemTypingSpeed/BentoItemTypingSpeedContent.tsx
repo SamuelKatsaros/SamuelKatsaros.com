@@ -12,7 +12,6 @@ import BentoBadge from '../BentoBadge'
 const mapTypingDetailData = (data: MonkeyTypeData) => {
   const LANGUAGE: Record<MonkeyTypeLanguage, string> = {
     english: 'EN',
-    indonesian: 'ID'
   }
   return [
     { icon: Timer, category: 'time', value: `${data.time}s` },
@@ -47,7 +46,7 @@ interface Props extends MonkeyTypeData {}
 const TypingSpeed = (props: Props) => {
   return (
     <a
-      href='https://monkeytype.com/profile/xhisoka_'
+      href='https://monkeytype.com/profile/xhisoka'
       target='_blank'
       className='relative flex h-full flex-col justify-between overflow-hidden rounded-3xl px-5 pb-6 pt-4 max-md:gap-12'
     >

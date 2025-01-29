@@ -1,0 +1,28 @@
+---
+import client from '@/lib/client'
+import BentoItemAppleMusicAuth from './BentoItemAppleMusicAuth'
+import BentoItemAppleMusicDisplay from './BentoItemAppleMusicDisplay'
+
+let data = null
+try {
+  const response = await client.api.applemusic.$get()
+  if (response.ok) {
+    data = await response.json()
+  }
+} catch (error) {
+  console.error('Failed to fetch Apple Music data:', error)
+}
+
+Astro.response.headers.set('Cache-Control', 'public, max-age=300')
+---
+
+{
+  data ? (
+    <BentoItemAppleMusicDisplay track={data.track} client:load />
+  ) : (
+    <div class="flex h-full flex-col items-center justify-center gap-2">
+      <p class="text-slate-400">Connect your Apple Music account</p>
+      <BentoItemAppleMusicAuth client:only="react" />
+    </div>
+  )
+}

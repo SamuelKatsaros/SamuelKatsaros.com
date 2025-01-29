@@ -37,7 +37,7 @@ const ZoomButton = (props: ZoomButtonProps) => {
     <button
       onClick={onClick}
       className={cn(
-        'absolute size-10 rounded-full bg-zinc-950 text-3xl leading-none outline outline-2 outline-slate-700',
+        'absolute size-10 rounded-full bg-white text-3xl leading-none outline outline-2 outline-slate-200',
         'scale-100 transition-all duration-300 hover:outline-4',
         'flex items-center justify-center',
         hide && 'scale-0',
@@ -91,7 +91,7 @@ const BentoItemMapLocation = ({ className }: Props) => {
         zoomControl={false} // Hides the zoom control
         attributionControl={false} // Hides the attribution control
         className={cn(
-          'brightness-[0.64] -hue-rotate-[24deg] saturate-[0.86]',
+          'brightness-[1] -hue-rotate-[24deg] saturate-[0.86]',
           'h-full min-h-full w-full',
           className
         )}
@@ -111,8 +111,8 @@ const BentoItemMapLocation = ({ className }: Props) => {
       </MapContainer>
       <div className='absolute inset-0 flex items-center justify-center'>
         <div className='relative size-16'>
-          <div className='absolute size-full animate-ping rounded-full bg-emerald-300/20 opacity-65 blur-sm'></div>
-          <div className='drop-shadow-green size-full rounded-full bg-emerald-400/30'></div>
+          <div className='absolute size-full animate-ping rounded-full bg-sky-300/20 opacity-65 blur-sm'></div>
+          <div className='drop-shadow-sky size-full rounded-full bg-sky-400/30'></div>
         </div>
       </div>
 

@@ -1,0 +1,26 @@
+---
+import client from '@/lib/client'
+import BentoItemGoodreadsDisplay from './BentoItemGoodreadsDisplay'
+
+let data = null
+try {
+  const response = await client.api.goodreads.$get()
+  if (response.ok) {
+    data = await response.json()
+  }
+} catch (error) {
+  console.error('Failed to fetch Goodreads data:', error)
+}
+
+Astro.response.headers.set('Cache-Control', 'public, max-age=86400')
+---
+
+{
+  data ? (
+    <BentoItemGoodreadsDisplay books={data.books} client:only='react' />
+  ) : (
+    <div class="flex h-full flex-col items-center justify-center gap-2">
+      <p class="text-slate-400">Loading reading data...</p>
+    </div>
+  )
+}

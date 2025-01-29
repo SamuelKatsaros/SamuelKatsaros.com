@@ -53,23 +53,10 @@ export default defineConfig({
         context: 'server',
         access: 'secret'
       }),
-      // SPOTIFY_CLIENT_ID: envField.string({
-      //   context: 'server',
-      //   access: 'secret'
-      // }),
-      // SPOTIFY_CLIENT_SECRET: envField.string({
-      //   context: 'server',
-      //   access: 'secret'
-      // }),
-      // SPOTIFY_REFRESH_TOKEN: envField.string({
-      //   context: 'server',
-      //   access: 'secret'
-      // }),`
       MONKEYTYPE_API_KEY: envField.string({
         context: 'server',
         access: 'secret'
       }),
-
       PUBLIC_VERCEL_ENV: envField.string({
         context: 'client',
         access: 'public',
@@ -85,7 +72,39 @@ export default defineConfig({
         context: 'client',
         access: 'public',
         optional: true
-      })
+      }),
+      APPLE_MUSIC_PRIVATE_KEY: envField.string({
+        context: 'server',
+        access: 'secret'
+      }),
+      APPLE_MUSIC_KEY_ID: envField.string({
+        context: 'server',
+        access: 'secret'
+      }),
+      APPLE_MUSIC_TEAM_ID: envField.string({
+        context: 'server',
+        access: 'secret'
+      }),
+      OPENAI_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret'
+      }),
+      TWILIO_ACCOUNT_SID: envField.string({
+        context: 'server',
+        access: 'secret'
+      }),
+      TWILIO_AUTH_TOKEN: envField.string({
+        context: 'server',
+        access: 'secret'
+      }),
+      TWILIO_PHONE_NUMBER: envField.string({
+        context: 'server',
+        access: 'secret'
+      }),
+      ADMIN_PHONE_NUMBER: envField.string({
+        context: 'server',
+        access: 'secret'
+      }),
     }
   },
 
