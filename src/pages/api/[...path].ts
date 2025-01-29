@@ -7,6 +7,8 @@ import github from './_services/github'
 import getLinkMetadata from './_services/linkMetadata'
 import getMonkeytypeData from './_services/monkeytype'
 import getTweetContent from './_services/tweetContent'
+import getAppleMusicData from './_services/applemusic'
+import getGoodreadsData from './_services/goodreads'
 
 const app = new Hono()
   .basePath('/api')
@@ -20,7 +22,6 @@ const app = new Hono()
     zValidator('query', z.object({ url: z.string() })),
     async (c) => {
       const { url } = c.req.valid('query')
-
       return c.json(await getLinkMetadata(url))
     }
   )
@@ -35,11 +36,12 @@ const app = new Hono()
     async (c) => {
       const { id } = c.req.valid('param')
       return c.json(await getTweetContent(id), 200, {
-        'Cache-Control':
-          'max-age=86400, s-maxage=86400, stale-while-revalidate=600'
+        'Cache-Control': 'max-age=86400, s-maxage=86400, stale-while-revalidate=600'
       })
     }
   )
+  .get('/applemusic', async (c) => c.json(await getAppleMusicData()))
+  .get('/goodreads', async (c) => c.json(await getGoodreadsData()))
 
 export const ALL: APIRoute = (context) => app.fetch(context.request)
 

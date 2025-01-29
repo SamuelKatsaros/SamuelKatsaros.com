@@ -1,7 +1,4 @@
-import type { APIRoute } from 'astro'
-
-export const GET: APIRoute = async () => {
-  // Mock data since Goodreads API is no longer available
+export default async function getGoodreadsData() {
   const books = [
     {
       title: "This Side of Paradise",
@@ -29,10 +26,5 @@ export const GET: APIRoute = async () => {
     }
   ]
 
-  return new Response(JSON.stringify({ books }), {
-    status: 200,
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-}
+  return { books }
+} 
