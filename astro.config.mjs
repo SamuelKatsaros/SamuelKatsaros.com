@@ -39,8 +39,12 @@ export default defineConfig({
   },
 
   image: {
-    domains: ['*'],
-    remotePatterns: [{ protocol: 'https' }]
+    domains: ['images-na.ssl-images-amazon.com', 'pbs.twimg.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: '*.ssl-images-amazon.com' },
+      { protocol: 'https', hostname: '*.twimg.com' },
+      { protocol: 'https', hostname: '*.githubusercontent.com' }
+    ]
   },
 
   env: {

@@ -3,19 +3,19 @@ export default async function getGoodreadsData() {
     {
       title: "This Side of Paradise",
       author: "F. Scott Fitzgerald",
-      coverUrl: "/src/assets/This-Side-of-Paradise.jpeg",
+      coverUrl: "/public/images/books/This-Side-of-Paradise.jpeg",
       bookUrl: "https://www.goodreads.com/book/show/46165.This_Side_of_Paradise?ref=nav_sb_ss_1_16"
     },
     {
       title: "Elon Musk",
       author: "Walter Isaacson", 
-      coverUrl: "/src/assets/Elon-Musk.jpg",
+      coverUrl: "/public/images/books/Elon-Musk.jpg",
       bookUrl: "https://www.goodreads.com/book/show/122765395-elon-musk"
     },
     {
       title: "The Accidental Billionaires",
       author: "Ben Mezrich",
-      coverUrl: "/src/assets/Accidental-Billionaires.jpg",
+      coverUrl: "/public/images/books/Accidental-Billionaires.jpg",
       bookUrl: "https://www.goodreads.com/book/show/6326920-the-accidental-billionaires"
     },
     {
