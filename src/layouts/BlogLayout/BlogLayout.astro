@@ -65,17 +65,17 @@ const {
   <section class='mt-8 sm:font-light'>
     <BlogInfo pubDate={pubDate} readingTime={readingTime} />
     <h1
-      class='font-heading mt-4 text-[clamp(1.8rem,5vw,2rem)] font-semibold leading-[1.25] !-tracking-[0.01em] md:leading-[1.1]'
+      class='font-heading mt-4 text-[clamp(1.8rem,5vw,2rem)] font-semibold leading-[1.25] !-tracking-[0.01em] md:leading-[1.1] text-gray-900'
     >
       {title}
     </h1>
-    <h3 class='mt-2 text-zinc-400 max-sm:text-sm'>
+    <h3 class='mt-2 text-gray-600 max-sm:text-sm'>
       {description}
     </h3>
     <ul class='mt-8 flex flex-wrap gap-2'>
       {
         tags.map((item) => (
-          <li class='rounded bg-zinc-900 px-2 py-1 font-mono text-xs tracking-tight text-zinc-500'>
+          <li class='rounded bg-gray-100 px-2 py-1 font-mono text-xs tracking-tight text-gray-600'>
             {item}
           </li>
         ))
@@ -84,7 +84,7 @@ const {
   </section>
 
   <div
-    class='mt-8 h-[1px] w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900'
+    class='mt-8 h-[1px] w-full bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200'
   >
   </div>
 
@@ -92,7 +92,7 @@ const {
     <article
       id='article'
       class:list={[
-        'prose prose-invert min-w-0 max-w-none max-sm:prose-sm',
+        'prose min-w-0 max-w-none max-sm:prose-sm',
         'prose-headings:font-display prose-headings:scroll-m-16 sm:prose-headings:scroll-m-24',
         'prose-a:article-link prose-a:text-[var(--projectAccentColor)]'
       ]}
@@ -100,7 +100,7 @@ const {
       <slot />
       {
         updatedDate && (
-          <p class='!mt-8 text-zinc-500'>
+          <p class='!mt-8 text-gray-600'>
             Last updated on {formatDateByTimeZone(updatedDate)} UTC+7.
             {latestCommitUrl && (
               <LinkArticle href={latestCommitUrl}>
@@ -121,7 +121,7 @@ const {
   <section class='mt-16'>
     <Link
       href='/blog'
-      class='!text-zinc-200 !no-underline'
+      class='!text-gray-900 !no-underline'
       styled
       hoverStyled
       hoverEffectOffsetStart='24px'
@@ -132,9 +132,9 @@ const {
   </section>
 </BaseLayout>
 
-<style is:global define:vars={{ projectAccentColor: '#2dd4bf' }}>
+<style is:global define:vars={{ projectAccentColor: '#0ea5e9' }}>
   * {
-    --projectAccentColor: theme(colors.zinc.200);
+    --projectAccentColor: theme(colors.sky.500);
   }
 
   .article-heading > a {
@@ -142,6 +142,7 @@ const {
     text-decoration: none;
     text-underline-offset: 0px;
     transition: all 150ms ease-in-out;
+    color: theme(colors.gray.900);
   }
 
   @media (max-width: 480px) {
@@ -156,7 +157,7 @@ const {
   }
 
   .article-heading > a::after {
-    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 16 16'%3E%3Cpath fill='gray' fill-rule='evenodd' d='M7.238 2.634a.75.75 0 1 0-1.476-.268L5.283 5H3a.75.75 0 1 0 0 1.5h2.01l-.545 3H2A.75.75 0 1 0 2 11h2.192l-.43 2.366a.75.75 0 1 0 1.476.268L5.717 11h3.475l-.43 2.366a.75.75 0 1 0 1.476.268L10.717 11H13a.75.75 0 0 0 0-1.5h-2.01l.545-3H14A.75.75 0 0 0 14 5h-2.192l.43-2.366a.75.75 0 1 0-1.476-.268L10.283 5H6.808zM9.465 9.5l.545-3H6.535l-.545 3z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 16 16'%3E%3Cpath fill='%23666666' fill-rule='evenodd' d='M7.238 2.634a.75.75 0 1 0-1.476-.268L5.283 5H3a.75.75 0 1 0 0 1.5h2.01l-.545 3H2A.75.75 0 1 0 2 11h2.192l-.43 2.366a.75.75 0 1 0 1.476.268L5.717 11h3.475l-.43 2.366a.75.75 0 1 0 1.476.268L10.717 11H13a.75.75 0 0 0 0-1.5h-2.01l.545-3H14A.75.75 0 0 0 14 5h-2.192l.43-2.366a.75.75 0 1 0-1.476-.268L10.283 5H6.808zM9.465 9.5l.545-3H6.535l-.545 3z' clip-rule='evenodd'/%3E%3C/svg%3E");
     display: inline-block;
     margin-left: 4px;
     height: 18px;
@@ -201,7 +202,7 @@ const {
 
         const id = entry.target.getAttribute('id')
         const link = document.querySelector(`li > a[href="#${id}"]`)
-        const textStyle = 'text-zinc-300'
+        const textStyle = 'text-gray-900'
 
         document
           .querySelectorAll(`.${textStyle}`)
