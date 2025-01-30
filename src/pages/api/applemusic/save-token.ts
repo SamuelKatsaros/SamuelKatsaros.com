@@ -7,18 +7,18 @@ export const POST: APIRoute = async ({ request }) => {
     if (!token) {
       return new Response(
         JSON.stringify({ error: 'No token provided' }), 
-        { status: 400 }
+        { 
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        }
       )
     }
 
-    // Use environment variables for the base URL
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.PUBLIC_VERCEL_URL 
-      ? `https://${process.env.PUBLIC_VERCEL_URL}`
-      : 'https://samuelkatsaros.com'
-
-    const developerTokenResponse = await fetch(`${baseUrl}/api/applemusic/token`)
+    // Use the same origin for token endpoint
+    const developerTokenResponse = await fetch(`${request.url.split('/save-token')[0]}/token`)
+    if (!developerTokenResponse.ok) {
+      throw new Error('Failed to get developer token')
+    }
     const { token: developerToken } = await developerTokenResponse.json()
 
     const validateResponse = await fetch('https://api.music.apple.com/v1/me/recent/played/tracks', {
@@ -37,7 +37,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(
       JSON.stringify({ success: true }), 
-      { status: 200 }
+      { 
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      }
     )
   } catch (error) {
     console.error('Failed to save Apple Music token:', error)
@@ -45,7 +48,10 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify({ 
         error: error instanceof Error ? error.message : 'Failed to save token' 
       }), 
-      { status: 500 }
+      { 
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      }
     )
   }
 } 
