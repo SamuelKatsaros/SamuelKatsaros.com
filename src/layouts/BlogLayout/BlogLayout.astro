@@ -2,7 +2,6 @@
 import { ArrowRight } from '@icons/ArrowRight'
 import type { MarkdownHeading } from 'astro'
 import type { InferEntrySchema } from 'astro:content'
-import type { ImageMetadata } from 'astro'
 
 import BlogInfo from '@/components/BlogInfo.astro'
 import { ArrowOutward } from '@/components/icons/ArrowOutward'
@@ -19,7 +18,6 @@ import BaseLayout from '../BaseLayout.astro'
 interface Props extends InferEntrySchema<'blog'> {
   headings: MarkdownHeading[]
   id: string
-  heroImage: ImageMetadata
 }
 
 const {
@@ -45,6 +43,7 @@ const {
     slot='seo'
   />
   <slot name='head' slot='head' />
+  <!-- <TopOverlay /> -->
   <ScrollProgressBar
     className='bg-[var(--projectAccentColor)]'
     targetId='article'
@@ -70,13 +69,13 @@ const {
     >
       {title}
     </h1>
-    <h3 class='mt-2 text-gray-700 max-sm:text-sm'>
+    <h3 class='mt-2 text-zinc-400 max-sm:text-sm'>
       {description}
     </h3>
     <ul class='mt-8 flex flex-wrap gap-2'>
       {
         tags.map((item) => (
-          <li class='rounded bg-gray-100 px-2 py-1 font-mono text-xs tracking-tight text-gray-600'>
+          <li class='rounded bg-zinc-900 px-2 py-1 font-mono text-xs tracking-tight text-zinc-500'>
             {item}
           </li>
         ))
@@ -85,7 +84,7 @@ const {
   </section>
 
   <div
-    class='mt-8 h-[1px] w-full bg-gradient-to-r from-zinc-100 via-zinc-200 to-zinc-100'
+    class='mt-8 h-[1px] w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900'
   >
   </div>
 
@@ -93,15 +92,15 @@ const {
     <article
       id='article'
       class:list={[
-        'prose min-w-0 max-w-none max-sm:prose-sm',
+        'prose prose-invert min-w-0 max-w-none max-sm:prose-sm',
         'prose-headings:font-display prose-headings:scroll-m-16 sm:prose-headings:scroll-m-24',
-        'prose-a:article-link prose-a:text-gray-800'
+        'prose-a:article-link prose-a:text-[var(--projectAccentColor)]'
       ]}
     >
       <slot />
       {
         updatedDate && (
-          <p class='!mt-8 text-gray-500'>
+          <p class='!mt-8 text-zinc-500'>
             Last updated on {formatDateByTimeZone(updatedDate)} UTC+7.
             {latestCommitUrl && (
               <LinkArticle href={latestCommitUrl}>
@@ -122,7 +121,7 @@ const {
   <section class='mt-16'>
     <Link
       href='/blog'
-      class='!text-black !no-underline'
+      class='!text-zinc-200 !no-underline'
       styled
       hoverStyled
       hoverEffectOffsetStart='24px'
@@ -135,7 +134,7 @@ const {
 
 <style is:global define:vars={{ projectAccentColor: '#2dd4bf' }}>
   * {
-    --projectAccentColor: theme(colors.gray.200);
+    --projectAccentColor: theme(colors.zinc.200);
   }
 
   .article-heading > a {
@@ -202,7 +201,7 @@ const {
 
         const id = entry.target.getAttribute('id')
         const link = document.querySelector(`li > a[href="#${id}"]`)
-        const textStyle = 'text-gray-500'
+        const textStyle = 'text-zinc-300'
 
         document
           .querySelectorAll(`.${textStyle}`)
