@@ -14,7 +14,7 @@ let adapter = vercel({
   webAnalytics: {
     enabled: true
   },
-  imageService: true
+  imageService: false
 })
 
 if (process.argv[3] === '--node' || process.argv[4] === '--node') {
@@ -39,11 +39,12 @@ export default defineConfig({
   },
 
   image: {
-    domains: ['images-na.ssl-images-amazon.com', 'pbs.twimg.com'],
+    domains: ['images-na.ssl-images-amazon.com', 'pbs.twimg.com', 'samuelekatsaros.com'],
     remotePatterns: [
       { protocol: 'https', hostname: '*.ssl-images-amazon.com' },
       { protocol: 'https', hostname: '*.twimg.com' },
-      { protocol: 'https', hostname: '*.githubusercontent.com' }
+      { protocol: 'https', hostname: '*.githubusercontent.com' },
+      { protocol: 'https', hostname: 'samuelkatsaros.com' }
     ]
   },
 
