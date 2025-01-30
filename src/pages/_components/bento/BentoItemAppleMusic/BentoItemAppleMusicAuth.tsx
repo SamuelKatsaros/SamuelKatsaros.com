@@ -17,7 +17,6 @@ function BentoItemAppleMusicAuth() {
 
     script.onload = async () => {
       try {
-        // Get the full URL using window.location
         const baseUrl = window.location.origin
         const response = await fetch(`${baseUrl}/api/applemusic/token`)
         if (!response.ok) {
@@ -25,23 +24,23 @@ function BentoItemAppleMusicAuth() {
         }
         const { token: developerToken } = await response.json()
         
-        console.log('Developer Token:', developerToken.substring(0, 20) + '...') // Debug log
-
-        if (window.MusicKit) {
-          await window.MusicKit.configure({
-            developerToken,
-            app: {
-              name: 'Samuel Katsaros',
-              build: '1.0.0',
-              id: 'com.samuelkatsaros.media'
-            },
-            storefrontId: 'us'
-          })
-          console.log('MusicKit configured successfully')
-          setIsLoaded(true)
-        } else {
+        if (!window.MusicKit) {
           throw new Error('MusicKit not found')
         }
+
+        // Simplified configuration
+        const configuration = {
+          developerToken,
+          app: {
+            name: 'Samuel Katsaros',
+            build: '1.0.0',
+            id: 'media.com.samuelkatsaros'
+          }
+        }
+
+        await window.MusicKit.configure(configuration)
+        console.log('MusicKit configured successfully')
+        setIsLoaded(true)
       } catch (error) {
         console.error('Setup failed:', error)
         setError(error instanceof Error ? error.message : 'Failed to setup MusicKit')
