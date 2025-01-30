@@ -11,16 +11,23 @@ export const GET: APIRoute = async () => {
       throw new Error('Missing required environment variables')
     }
 
-    const developerToken = jwt.sign(
-      {},
-      `-----BEGIN PRIVATE KEY-----\n${privateKey}\n-----END PRIVATE KEY-----`,
-      {
-        algorithm: 'ES256',
-        keyid: keyId,
-        issuer: teamId,
-        expiresIn: '180d',
-      }
-    )
+    // Format the private key properly
+    const formattedKey = privateKey
+      .replace(/\\n/g, '\n')
+      .replace(/^['"]/, '')
+      .replace(/['"]$/, '')
+
+    // Ensure the key has the proper PEM format
+    const pemKey = formattedKey.includes('-----BEGIN PRIVATE KEY-----') 
+      ? formattedKey
+      : `-----BEGIN PRIVATE KEY-----\n${formattedKey}\n-----END PRIVATE KEY-----`
+
+    const developerToken = jwt.sign({}, pemKey, {
+      algorithm: 'ES256',
+      keyid: keyId,
+      issuer: teamId,
+      expiresIn: '180d',
+    })
 
     return new Response(JSON.stringify({ token: developerToken }), {
       headers: { 'Content-Type': 'application/json' }
