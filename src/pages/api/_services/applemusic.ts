@@ -1,35 +1,12 @@
 export default async function getAppleMusicData() {
   try {
-    // Use environment variables for the base URL
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.PUBLIC_VERCEL_URL 
-      ? `https://${process.env.PUBLIC_VERCEL_URL}`
-      : 'https://samuelkatsaros.com'
-
-    const tokenResponse = await fetch(`${baseUrl}/api/applemusic/token`)
-    if (!tokenResponse.ok) {
-      throw new Error('Failed to get developer token')
-    }
-    const { token: developerToken } = await tokenResponse.json()
-
-    const response = await fetch('https://api.music.apple.com/v1/me/recent/played/tracks', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${developerToken}`,
-        'Music-User-Token': process.env.APPLE_MUSIC_USER_TOKEN || ''
-      }
-    })
-    
-    const data = await response.json()
-    const track = data.data[0]
-
+    // Return placeholder data
     return {
       track: {
-        name: track.attributes.name,
-        artist: track.attributes.artistName,
-        albumArt: track.attributes.artwork.url,
-        url: track.attributes.url
+        name: "Cheese Cake",
+        artist: 'Dexter Gordon',
+        albumArt: 'https://i1.sndcdn.com/artworks-skijcrmHqyUO-0-t500x500.jpg',
+        url: 'https://music.apple.com/us/album/cheese-cake/1459439436?i=1459439440'
       }
     }
   } catch (error) {
