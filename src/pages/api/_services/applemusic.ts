@@ -1,7 +1,13 @@
 export default async function getAppleMusicData() {
   try {
-    // Use the full URL for the token endpoint
-    const tokenResponse = await fetch('https://samuelkatsaros.com/api/applemusic/token')
+    // Use environment variables for the base URL
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.PUBLIC_VERCEL_URL 
+      ? `https://${process.env.PUBLIC_VERCEL_URL}`
+      : 'https://samuelkatsaros.com'
+
+    const tokenResponse = await fetch(`${baseUrl}/api/applemusic/token`)
     if (!tokenResponse.ok) {
       throw new Error('Failed to get developer token')
     }

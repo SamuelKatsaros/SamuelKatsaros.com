@@ -11,8 +11,14 @@ export const POST: APIRoute = async ({ request }) => {
       )
     }
 
-    // Use relative URL instead of localhost
-    const developerTokenResponse = await fetch('/api/applemusic/token')
+    // Use environment variables for the base URL
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.PUBLIC_VERCEL_URL 
+      ? `https://${process.env.PUBLIC_VERCEL_URL}`
+      : 'https://samuelkatsaros.com'
+
+    const developerTokenResponse = await fetch(`${baseUrl}/api/applemusic/token`)
     const { token: developerToken } = await developerTokenResponse.json()
 
     const validateResponse = await fetch('https://api.music.apple.com/v1/me/recent/played/tracks', {
