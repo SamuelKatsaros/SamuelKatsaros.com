@@ -1,7 +1,7 @@
 export default async function getAppleMusicData() {
   try {
-    // First get the developer token
-    const tokenResponse = await fetch('/api/applemusic/token')
+    // Use the full URL for the token endpoint
+    const tokenResponse = await fetch('https://samuelkatsaros.com/api/applemusic/token')
     if (!tokenResponse.ok) {
       throw new Error('Failed to get developer token')
     }
