@@ -14,13 +14,17 @@ export const POST: APIRoute = async ({ request }) => {
       )
     }
 
-    // Use the same origin for token endpoint
-    const developerTokenResponse = await fetch(`${request.url.split('/save-token')[0]}/token`)
+    // Get the base URL from the request
+    const url = new URL(request.url)
+    const baseUrl = `${url.protocol}//${url.host}`
+    
+    const developerTokenResponse = await fetch(`${baseUrl}/api/applemusic/token`)
     if (!developerTokenResponse.ok) {
       throw new Error('Failed to get developer token')
     }
     const { token: developerToken } = await developerTokenResponse.json()
 
+    // Validate the token with Apple Music API
     const validateResponse = await fetch('https://api.music.apple.com/v1/me/recent/played/tracks', {
       headers: {
         'Authorization': `Bearer ${developerToken}`,
@@ -29,10 +33,12 @@ export const POST: APIRoute = async ({ request }) => {
     })
 
     if (!validateResponse.ok) {
+      const errorText = await validateResponse.text()
+      console.error('Validation response:', errorText)
       throw new Error('Invalid user token')
     }
 
-    // If validation succeeds, store the token
+    // Store token in environment variable
     process.env.APPLE_MUSIC_USER_TOKEN = token
 
     return new Response(
