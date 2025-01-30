@@ -29,6 +29,8 @@ export const GET: APIRoute = async () => {
       expiresIn: '180d',
     })
 
+    console.log('Generated developer token:', developerToken.substring(0, 20) + '...')
+
     return new Response(JSON.stringify({ token: developerToken }), {
       headers: { 'Content-Type': 'application/json' }
     })
