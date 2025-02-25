@@ -1,0 +1,76 @@
+---
+year: 2025
+title: 'Lexicon: Interactive Vocabulary Learning App'
+htmlTitle: 'Lexicon: Interactive Vocabulary Learning App'
+description: 'An iOS app that transforms vocabulary learning through interactive chat-based exercises and AI-powered feedback.'
+heroImage: '/src/assets/lexicon-chat.png'
+heroImageAlign: 'center'
+
+links:
+  - name: 'GitHub'
+    icon: 'Github'
+    url: 'https://github.com/SamuelKatsaros/Lexicon'
+  - name: 'App Store'
+    icon: 'Apple'
+    url: 'https://apps.apple.com/us/app/lexicon-vocabulary'
+  - name: 'Demo Video' 
+    icon: 'Video'
+    url: 'https://youtu.be/lexicon-demo'
+---
+
+# Lexicon: An Interactive Vocabulary Learning App
+
+## The Problem with Learning Words  
+
+Learning vocabulary seems simple. You read a word, you see its definition, maybe glance at an example sentence, and you move on. But days later, that word is gone from your memory. Why? Because learning doesn’t happen in isolation—it requires application. It’s the same reason that when you wake up from a dream, they say you should tell someone about it. Using new information is what cements it in memory.  
+
+Math works the same way. Lectures introduce a concept, but recitation forces you to apply it. Without that second step, knowledge slips away. That’s the problem Lexicon aims to solve.  
+
+## What Lexicon Does  
+
+Lexicon is an iOS app that transforms vocabulary learning from passive memorization into an interactive experience. Every day, users receive a **word of the day**. But instead of just reading the definition and moving on, they engage in a chat-based exercise that requires them to use the word in conversation.  
+
+### Core Features  
+
+- **Chat-Based Learning:** Instead of just displaying words, Lexicon prompts users to form sentences, asking them about their day and encouraging them to integrate the word naturally.  
+- **AI-Powered Feedback:** The app evaluates whether the word was used correctly, pushing users toward more accurate application.  
+- **Word Tracking & Gamification:** Users can save words, track their learning progress, earn streaks, XP, and badges, and even compete with friends.  
+- **Clean, Apple-Inspired UI:** Designed following Apple’s Human Interface Guidelines for a seamless, intuitive experience.  
+
+## The Technical Side  
+
+Lexicon was built in **Swift** using **Xcode**, leveraging Apple’s ecosystem to create a smooth and responsive interface.  
+
+### Chat System & AI Evaluation  
+
+The chat feature isn’t just a gimmick—it’s built around **natural language processing** techniques to ensure meaningful feedback. Here’s how it works:  
+
+1. **Word Storage & Selection**  
+   - Words and definitions are stored in a `.json` dataset.  
+   - The app randomly selects a **word of the day** along with example sentences.  
+
+2. **Sentence Evaluation**  
+   - When users submit a sentence, the app analyzes it using **semantic similarity** and **cosine similarity**.  
+   - These methods compare the user's sentence to example usages, determining if the word fits the context.  
+
+3. **Machine Learning with CreateML**  
+   - An initial model was built using **CreateML**, acting as a classifier to tag parts of speech and validate word usage.  
+   - However, accuracy was inconsistent, leading to the shift toward **semantic similarity-based evaluation**, which provided more reliable results.  
+
+### Authentication & Data Persistence  
+
+- **OAuth Authentication** ensures users can save progress and track learning.  
+- **Offline Functionality** was a requirement for the Swift Challenge, meaning the app runs locally without relying on an external API.  
+- Future versions could integrate **LLMs (Large Language Models)** to refine feedback and offer richer interactions.  
+
+## Lessons Learned  
+
+Lexicon was my first deep dive into **Swift** and **Xcode**, and it pushed me to explore areas I hadn’t worked with before—natural language processing, machine learning models, and Apple's UI design principles. The biggest takeaway? **Interactivity is key to learning.**  
+
+While machine learning models like **CoreML text classifiers** seemed like the right approach at first, they lacked the precision needed for contextual sentence evaluation. **Semantic similarity and cosine similarity proved to be the better alternative**, reinforcing how important it is to be flexible when building AI-driven applications.  
+
+## Looking Ahead  
+
+Because the Swift Challenge required offline apps, Lexicon currently operates without an external server. But in the future, I'd love to integrate an **API-powered model**, leveraging **LLMs** for even smarter feedback. Imagine a vocabulary app that doesn’t just grade you, but actively helps refine your sentence structure and word choice in real-time. That’s the next step.  
+
+Lexicon started as a competition project, but it ended up being much more than that—a fully functional, engaging way to make vocabulary learning stick.  
