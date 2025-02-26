@@ -44,13 +44,13 @@ export const mainMetaData = metaDataSchema.parse(_mainMetaData)
 const _projectMetaData: MetaDataInput = {
   title: 'Curiosities Developed',
   description:
-    'I try to document the projects I work on. I often find myself in curious though, but rarely have the{nSm}time to commit to such project. Though, when I do, my creations teach me more than I anticipated.'
+    'I try to document the projects I work on. I often find myself curious, but rarely have the{nSm}time to commit to such project. Though, when I do, my creations teach me more than I anticipated.'
 }
 export const projectMetaData: MetaData = metaDataSchema.parse(_projectMetaData)
 
 const _blogMetaData: MetaDataInput = {
   title: 'My Thoughts in .mdx',
   description:
-    'I think a lot, whether reading, writing, coding, or simply pondering. Though my thoughts{nSm}have a quick expiration, I found putting them down in ink helps with my daily introspection.'
+    'Whether reading, writing, or coding, I try to document my thoughts. Though my most{nSm}have a quick expiration, I found putting them down in markdown helps with my daily introspection.'
 }
 export const blogMetaData: MetaData = metaDataSchema.parse(_blogMetaData)
