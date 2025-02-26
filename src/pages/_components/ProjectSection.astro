@@ -6,7 +6,9 @@ import ProjectCard from '@/components/ProjectCard'
 import ProjectHeader from '@/components/ProjectHeader.astro'
 import { getCustomTransition } from '@/lib/customTransition'
 
-const projects = await getCollection('projects')
+const unsortedProjects = await getCollection('projects')
+// Sort projects by year in descending order (newest first)
+const projects = unsortedProjects.sort((a, b) => b.data.year - a.data.year)
 ---
 
 <section id='projects' class='mt-40 scroll-mt-16'>

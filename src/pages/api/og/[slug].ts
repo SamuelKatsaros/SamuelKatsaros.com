@@ -154,3 +154,5 @@ export const getStaticPaths = (async () => {
     props: { posts }
   }))
 }) satisfies GetStaticPaths
+
+export const prerender = true;

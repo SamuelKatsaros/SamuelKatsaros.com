@@ -17,12 +17,30 @@ dayjs.extend(relativeTime)
 
 const { owner, repository, class: className } = Astro.props
 
-const response = await client.api.github['repo-info'][':owner'][
-  ':repository'
-].$get({ param: { owner, repository } })
-const data = response.status === 200 ? await response.json() : null
+let data = null;
+try {
+  const response = await client.api.github['repo-info'][':owner'][
+    ':repository'
+  ].$get({ param: { owner, repository } })
+    .catch(() => null);
+  
+  // Check if response exists and has a json method
+  if (response && response.status === 200 && 'json' in response) {
+    data = await response.json();
+  }
+} catch (error) {
+  console.error(`Failed to fetch GitHub data for ${owner}/${repository}:`, error);
+  // Leave data as null
+}
 
-if (!data) return
+// Provide fallback data if the fetch failed
+if (!data) {
+  data = {
+    url: `https://github.com/${owner}/${repository}`,
+    description: "Repository information unavailable during build.",
+    pushedAt: new Date().toISOString()
+  };
+}
 
 const updatedTime = dayjs(data.pushedAt).fromNow()
 ---
