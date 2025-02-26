@@ -11,7 +11,9 @@ import { projectMetaData } from '@/lib/metaData'
 import Decorator from './_components/Decorator.astro'
 
 console.log('Loading projects for index page')
-const projects = (await getCollection('projects')).sort((a, b) => b.data.year - a.data.year)
+const unsortedProjects = await getCollection('projects')
+// Sort projects by year in descending order (newest first)
+const projects = unsortedProjects.sort((a, b) => b.data.year - a.data.year)
 console.log('Loaded project IDs:', projects.map(p => p.id))
 ---
 

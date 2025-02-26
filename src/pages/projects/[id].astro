@@ -28,8 +28,8 @@ const { Content, headings } = await render(entry)
 let lastUpdatedTime = entry.data.updatedDate || new Date()
 let latestCommitUrl = ''
 
-// Skip GitHub API calls during build time
-if (import.meta.env.PROD && entry.data.githubPath) {
+// Skip GitHub API calls during build time for problematic projects like seattle-data
+if (import.meta.env.PROD && entry.data.githubPath && entry.id !== 'seattle-data') {
   try {
     const getLastUpdatedTime = client.api.github['last-updated-file']
     const response = await getLastUpdatedTime
@@ -43,6 +43,9 @@ if (import.meta.env.PROD && entry.data.githubPath) {
     }
   } catch (error) {
     console.error(`Failed to fetch GitHub data for ${entry.id}:`, error)
+    // Provide fallback values and continue with the build
+    lastUpdatedTime = new Date()
+    latestCommitUrl = ''
   }
 }
 
