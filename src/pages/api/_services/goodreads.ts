@@ -13,10 +13,10 @@ export default async function getGoodreadsData() {
       bookUrl: "https://www.goodreads.com/book/show/122765395-elon-musk"
     },
     {
-      title: "The Accidental Billionaires",
-      author: "Ben Mezrich",
-      coverUrl: "/images/books/Accidental-Billionaires.jpg",
-      bookUrl: "https://www.goodreads.com/book/show/6326920-the-accidental-billionaires"
+      title: "Space to Grow",
+      author: "Matthew Weinzierl and Brendan Rosseau",
+      coverUrl: "/images/books/spacetogrow.jpg",
+      bookUrl: "https://www.goodreads.com/book/show/205959835-space-to-grow"
     },
     {
       title: "The Man Who Solved the Market",
