@@ -17,11 +17,11 @@ export const SOCIAL_MEDIA_DATA = [
   {
     name: 'Resume',
     icon: Scroll,
-    href: 'https://read.cv/samuelkatsaros'
+    href: '/resume'
   },
   {
     name: 'Email',
     icon: Mail,
-    href: 'mailto:samuel@onecardai.com'
+    href: 'mailto:samuel@samuelkatsaros.com'
   }
 ]

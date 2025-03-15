@@ -1,0 +1,288 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { Image } from 'astro:assets'
+import resumePDF from '@/assets/resume.pdf'
+import SEO from '@/components/SEO.astro'
+import SectionHeader from '@/components/SectionHeader.astro'
+import { HandWaving } from '@/components/icons/HandWaving'
+import Link from '@/components/Link'
+
+// Assuming the PDF is in src/assets/resume.pdf
+const pdfPath = resumePDF.src;
+
+const skills = {
+  technical: ['C/C++/C#', 'Python', 'R', 'MATLAB', 'SQL', 'Java', 'Tableau', 'Excel', 'Salesforce', 'PowerPoint', 'Bloomberg Terminal', 'VBA'],
+  frameworks: ['React', 'Next.js', 'Node.js', 'Express', 'TailwindCSS', 'Astro'],
+  tools: ['Git', 'Docker', 'Kubernetes', 'AWS', 'GCP', 'Azure'],
+  languages: ['English (Native)', 'Greek (Conversational)']
+};
+
+const morphingTexts = [
+  "Business Management",
+  "Private Equity",
+  "Quantitative Finance",
+  "Software Development",
+  "Entrepreneurship"
+];
+---
+
+<BaseLayout>
+  <SEO
+    slot="seo"
+    title="Resume | Samuel Katsaros"
+    description="Professional resume and career highlights of Samuel Katsaros - Business Management & Finance Professional with a strong technical background"
+  />
+
+  <div class="relative min-h-screen">
+    <div class="mx-auto max-w-6xl px-6 py-12 sm:px-8 sm:py-16">
+      <!-- Header Section -->
+      <header class="relative space-y-4 text-center">
+        <SectionHeader
+          icon={HandWaving}
+          section="Resume"
+          htmlTitle="Samuel Katsaros"
+        />
+
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+          <Link
+            href={pdfPath}
+            download="Samuel_Katsaros_Resume.pdf"
+            class="group relative inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-zinc-800"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+              <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+              <path d="M7 11l5 5l5 -5"></path>
+              <path d="M12 4l0 12"></path>
+            </svg>
+            Download PDF
+          </Link>
+          
+          <Link
+            href={pdfPath}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-zinc-50"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+              <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+              <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"></path>
+            </svg>
+            View PDF
+          </Link>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <div class="mt-16 grid gap-12 md:grid-cols-3">
+        <!-- Left Column -->
+        <div class="space-y-12 md:col-span-2">
+          <!-- Experience Section -->
+          <section class="space-y-8">
+            <h2 class="text-xl font-bold">Professional Experience</h2>
+            
+            {['Augr Inc.', 'Centre Lane Partners', 'J & J Samuel Associates'].map((company, index) => (
+              <div class="group relative rounded-2xl border border-zinc-100 p-6 transition-all hover:border-zinc-200">
+                <div class="absolute inset-0 -z-10 rounded-2xl bg-zinc-50 opacity-0 transition-all group-hover:opacity-100"></div>
+                <div class="flex justify-between">
+                  <h3 class="font-semibold">{company}</h3>
+                  <span class="text-sm text-zinc-500">{index === 0 ? 'Aug 2023 – Present' : index === 1 ? 'May 2024 – Aug 2024' : 'Jul 2022 – Aug 2023'}</span>
+                </div>
+                <p class="mt-2 text-sm text-zinc-600">{index === 0 ? 'Senior Private Equity Intern' : index === 1 ? 'Private Equity Intern' : 'Investment Analyst Intern'} | Manhattan, New York</p>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-600">
+                  {(index === 0 ? [
+                    'Managing a team of private equity interns, overseeing the sourcing and analysis of + 50 weekly deals',
+                    'Leading technical PortCo operations, developing real-time scrapers, and APIs to streamline backend and generate leads',
+                    'Executing leveraged buyouts with high opportunity for add-on investments, capitalizing on multiple arbitrage',
+                    'Securing follow-on capital for merger & acquisition strategy, continuously sourcing add-on opportunities'
+                  ] : index === 1 ? [
+                    'Lead the integration of iLevel into firm\'s private equity and credit operations, working directly with President and CFO',
+                    'Developed an API via iLevel to digest, manipulate, and customize data integrations, programming in Python, Java, and C#',
+                    'Employing: DCF, IRR, LBO, NPV, MOIC, Stress Testing, Precedent Transactions, Cap Rate Analysis, DSCR, SOTP'
+                  ] : [
+                    'Conducted financial analysis for +30 commercial real estate acquisitions and developments',
+                    'Led a comparative study across REITs, ETFs, and Private Equity investments, achieving 15% risk reduction',
+                    'Executed a roll-up merger, consolidating six properties, achieving a 23.7% IRR and a 3.7x equity multiple',
+                    'Actively managed portfolio performance, applying metrics to monitor market trends and assess valuations'
+                  ]).map(item => (
+                    <li class="flex items-start">
+                      <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+
+          <!-- Entrepreneurial Ventures -->
+          <section class="space-y-8">
+            <h2 class="text-xl font-bold">Entrepreneurial Ventures</h2>
+            
+            {[
+              {
+                name: 'Syllabus-Sharing Web App',
+                role: 'Founder & Developer',
+                date: 'Sep 2024 – Present',
+                points: [
+                  'Engineered a React.js web application leveraging JavaScript, JSX, HTML, and CSS to compress and store syllabi in an SQL database',
+                  'Deployed on a Raspberry Pi 5 Kubernetes cluster, serving over 12,000 active users across 5 universities'
+                ]
+              },
+              {
+                name: 'OneCard | www.OneCardAI.com',
+                role: 'Founder',
+                date: 'Nov 2023 - Present',
+                points: [
+                  'Pioneering a financial technology startup, targeting a +$130B market; recognized finalist in NY state business plan competition',
+                  'Engineering a proprietary machine learning algorithm using Python, C++, and C#, enhancing processing efficiency by 70%',
+                  'Leading a team of 8 to execute R&D and marketing strategies, achieving 40% increase in quarterly sales'
+                ]
+              },
+              {
+                name: 'Statistical Arbitrage Trading Model',
+                role: 'Quantitative Developer & Researcher',
+                date: 'Mar 2024 - Present',
+                points: [
+                  'Developed a quantitative trading model using Python, CUDA, MATLAB, and R, deployed on NVIDIA Jetson Orin Nano',
+                  'Engineered data pipelines to process financial datasets, compress through tokenization, and remove bias for backtesting',
+                  'Applied to equities using machine learning and extensive Python libraries to improve Sharpe ratio'
+                ]
+              }
+            ].map(venture => (
+              <div class="group relative rounded-2xl border border-zinc-100 p-6 transition-all hover:border-zinc-200">
+                <div class="absolute inset-0 -z-10 rounded-2xl bg-zinc-50 opacity-0 transition-all group-hover:opacity-100"></div>
+                <div class="flex justify-between">
+                  <h3 class="font-semibold">{venture.name}</h3>
+                  <span class="text-sm text-zinc-500">{venture.date}</span>
+                </div>
+                <p class="mt-2 text-sm text-zinc-600">{venture.role}</p>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-600">
+                  {(venture.points || []).map(point => (
+                    <li class="flex items-start">
+                      <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-12">
+          <!-- Education Section -->
+          <section class="space-y-6">
+            <h2 class="text-xl font-bold">Education</h2>
+            
+            <div class="space-y-6">
+              <div class="group relative rounded-2xl border border-zinc-100 p-6 transition-all hover:border-zinc-200">
+                <div class="absolute inset-0 -z-10 rounded-2xl bg-zinc-50 opacity-0 transition-all group-hover:opacity-100"></div>
+                <h3 class="font-semibold">Stony Brook University | Honors College</h3>
+                <p class="mt-2 text-sm text-zinc-600">Bachelor of Science in Business Management</p>
+                <p class="text-sm text-zinc-500">Graduated December 2024</p>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-600">
+                  <li class="flex items-start">
+                    <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                    <span>Specialization in Finance</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                    <span>Key Courses: Quantitative Finance, Probability Theory, Financial Mathematics, Applied Linear Algebra, Computer Science</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="group relative rounded-2xl border border-zinc-100 p-6 transition-all hover:border-zinc-200">
+                <div class="absolute inset-0 -z-10 rounded-2xl bg-zinc-50 opacity-0 transition-all group-hover:opacity-100"></div>
+                <h3 class="font-semibold">Harvard Business School</h3>
+                <p class="mt-2 text-sm text-zinc-600">MBA-prep | Summer Venture in Management Program</p>
+                <p class="text-sm text-zinc-500">Summer 2024 | 2% Acceptance Rate</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Skills Section -->
+          <section class="space-y-6">
+            <h2 class="text-xl font-bold">Skills</h2>
+            
+            <div class="space-y-6">
+              {Object.entries(skills).map(([category, items]) => (
+                <div class="space-y-2">
+                  <h3 class="text-sm font-medium text-zinc-900 first-letter:uppercase">{category}</h3>
+                  <div class="flex flex-wrap gap-2">
+                    {items.map(skill => (
+                      <span class="inline-flex items-center rounded-full bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-200">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <!-- Awards & Activities -->
+          <section class="space-y-6">
+            <h2 class="text-xl font-bold">Awards & Activities</h2>
+            
+            <div class="space-y-4">
+              <div class="rounded-2xl border border-zinc-100 p-6">
+                <h3 class="text-sm font-medium">Awards</h3>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-600">
+                  <li class="flex items-start">
+                    <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                    <span>New York Business Plan Competition Finalist</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                    <span>1st in Stock Summit</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                    <span>Real Estate Institute Scholar</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                    <span>NYCB Scholar</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="rounded-2xl border border-zinc-100 p-6">
+                <h3 class="text-sm font-medium">Leadership</h3>
+                <ul class="mt-4 space-y-2 text-sm text-zinc-600">
+                  <li class="flex items-start">
+                    <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                    <span>Investment Club President</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="mr-2 mt-1 block h-1.5 w-1.5 flex-none rounded-full bg-zinc-300"></span>
+                    <span>College of Business DEI Committee Founding Member</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="rounded-2xl border border-zinc-100 p-6">
+                <h3 class="text-sm font-medium">Interests</h3>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {['Golf (VP of Golf Club)', 'Spearfishing', 'Astrophysics', 'Rocket Modeling', 'Chess', 'Real Estate', 'Football (Linebacker)'].map(interest => (
+                    <span class="inline-flex items-center rounded-full bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-200">
+                      {interest}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // Add any client-side interactivity here
+  });
+</script> 

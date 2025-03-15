@@ -7,13 +7,17 @@ export function Send(props: SVGProps<SVGSVGElement>) {
       xmlns='http://www.w3.org/2000/svg'
       width='1em'
       height='1em'
-      viewBox='0 0 256 256'
+      viewBox='0 0 24 24'
       {...props}
     >
       <path
-        fill='currentColor'
-        d='M224 48a8 8 0 0 0-11.2-7.4L40.8 120a8 8 0 0 0 0 15.2l172 79.4a8 8 0 0 0 11.2-7.4V48m-16 142.4L59.1 128 208 65.6Z'
-      />
+        fill='none'
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+        d='M22 2l-11 11m11-11L15 22l-4-9l-9-4l20-7'
+      ></path>
     </svg>
   )
 }

@@ -4,6 +4,13 @@ import SEO from '@/components/SEO.astro'
 import ContactChat from './_components/contact/ContactChat'
 import { getCustomTransition } from '@/lib/customTransition'
 import { LinkedIn } from '@icons/LinkedIn'
+import { Github } from '@icons/Github'
+import { X } from '@icons/X'
+import { Mail } from '@icons/Mail'
+import { Phone } from '@icons/Phone'
+import { Location } from '@icons/Location'
+import { Scroll } from '@icons/Scroll'
+import { SOCIAL_MEDIA_DATA } from '@/components/socialMediaData'
 
 Astro.response.headers.set('Cache-Control', 'public, max-age=0')
 ---
@@ -15,7 +22,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0')
     slot="seo"
   />
 
-  <section class="min-h-screen pt-24 pb-32">
+  <section class="min-h-screen py-16">
     <div class="container mx-auto px-4">
       <div class="mb-12">
         <div 
@@ -35,44 +42,128 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0')
         >
           Let's Connect
         </h1>
+        
+        <p 
+          class="mt-4 max-w-xl text-lg text-zinc-600"
+          transition:animate={getCustomTransition(0.2)}
+        >
+          I'm always open to discussing new projects, opportunities, or just having a conversation.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div transition:animate={getCustomTransition(0.2)}>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
+        <div transition:animate={getCustomTransition(0.3)}>
           <ContactChat client:load />
+          
+          <div class="mt-8 bg-zinc-100 rounded-xl p-6 text-center">
+            <h2 class="text-xl font-medium text-zinc-900 mb-2">Let's Build Something Together</h2>
+            <p class="text-sm text-zinc-600 mb-4 max-w-xl mx-auto">
+              Whether you have a project in mind, want to join one ongoing, or just want to connect -- let's chat.
+            </p>
+          </div>
         </div>
 
         <div 
-          class="space-y-8 lg:mt-12"
-          transition:animate={getCustomTransition(0.3)}
+          class="space-y-8"
+          transition:animate={getCustomTransition(0.4)}
         >
-          <div class="rounded-xl border border-zinc-200 bg-zinc-100 p-6">
-            <h3 class="text-lg font-medium text-zinc-900">Quick Links</h3>
-            <div class="mt-4 space-y-4">
+          <div class="rounded-xl border border-zinc-200 bg-gradient-to-br from-zinc-50 to-zinc-100 p-6 shadow-sm">
+            <h3 class="text-xl font-medium text-zinc-900">Ways to Connect</h3>
+            <div class="mt-5 space-y-5">
+              <a 
+                href="mailto:samuel@samuelkatsaros.com"
+                class="flex items-center gap-4 rounded-lg border border-zinc-200 bg-white p-4 transition-all hover:border-zinc-300 hover:shadow-md"
+              >
+                <div class="rounded-full bg-blue-50 p-3">
+                  <Mail class="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <h4 class="font-medium text-zinc-900">Email</h4>
+                  <p class="text-sm text-zinc-600">samuel@samuelkatsaros.com</p>
+                </div>
+              </a>
+              
               <a 
                 href="https://linkedin.com/in/samuel-katsaros"
                 target="_blank"
                 rel="noopener noreferrer" 
-                class="flex items-center gap-3 text-zinc-600 hover:text-zinc-900 transition-colors"
+                class="flex items-center gap-4 rounded-lg border border-zinc-200 bg-white p-4 transition-all hover:border-zinc-300 hover:shadow-md"
               >
-                <div class="size-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <svg class="size-4" {...LinkedIn} />
+                <div class="rounded-full bg-blue-50 p-3">
+                  <LinkedIn class="h-5 w-5 text-blue-600" />
                 </div>
-                LinkedIn
+                <div>
+                  <h4 class="font-medium text-zinc-900">LinkedIn</h4>
+                  <p class="text-sm text-zinc-600">linkedin.com/in/samuel-katsaros</p>
+                </div>
               </a>
-              <!-- Add other quick links similar to your socialMediaData.ts -->
+              
+              {SOCIAL_MEDIA_DATA.map(platform => (
+                platform.name === 'Resume' && (
+                  <a 
+                    href={platform.href}
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    class="flex items-center gap-4 rounded-lg border border-zinc-200 bg-white p-4 transition-all hover:border-zinc-300 hover:shadow-md"
+                  >
+                    <div class="rounded-full bg-blue-50 p-3">
+                      <Scroll class="h-5 w-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <h4 class="font-medium text-zinc-900">Resume</h4>
+                      <p class="text-sm text-zinc-600">View my professional experience</p>
+                    </div>
+                  </a>
+                )
+              ))}
             </div>
           </div>
-
-          <div class="rounded-xl border border-zinc-200 bg-zinc-100 p-6">
-            <h3 class="text-lg font-medium text-zinc-900">Office Hours</h3>
+          
+          <div class="rounded-xl border border-zinc-200 bg-gradient-to-br from-zinc-50 to-zinc-100 p-6 shadow-sm overflow-hidden relative">
+            <div class="absolute -right-16 -bottom-16 opacity-10">
+              <Location class="h-48 w-48" />
+            </div>
+            
+            <h3 class="text-xl font-medium text-zinc-900">Location</h3>
             <p class="mt-2 text-zinc-600">
-              I'm typically available Monday through Friday, 9 AM to 5 PM EST.
-              Response time: within 24 hours.
+              Currently based in Long Island, NY, but I'm available remotely.
             </p>
-          </div>
+            
+            <div class="mt-4 rounded-lg overflow-hidden h-48 bg-zinc-200">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30599899437!2d-73.97968906347656!3d40.789642975348694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2fa1cf90808cb%3A0x166eef8ac39a2e02!2sLong%20Island%2C%20NY!5e0!3m2!1sen!2sus!4v1666361231930!5m2!1sen!2sus" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>        
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Enable clicking on links to activate tabs
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactLinks = document.querySelectorAll('a[onclick*="document.querySelector"]');
+    
+    contactLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const selector = this.getAttribute('onclick')?.match(/document\.querySelector\('([^']+)'\)/)?.[1];
+        if (selector) {
+          const tabButton = document.querySelector(selector);
+          tabButton?.click();
+          // Scroll to chat component
+          const chatComponent = document.querySelector('.contact-chat-component');
+          chatComponent?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  });
+</script>

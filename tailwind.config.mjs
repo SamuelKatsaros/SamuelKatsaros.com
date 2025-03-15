@@ -67,12 +67,12 @@ module.exports = {
   				'sans'
   			],
   			mono: [
-  				'DM Mono"',
+  				'DM Mono',
   				'monospace'
   			],
   			secondary: [
-  				'Fustat SemiBold", sans',
-  				{}
+  				'Fustat SemiBold',
+  				'sans'
   			]
   		},
   		screens: {

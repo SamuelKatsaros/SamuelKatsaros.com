@@ -1,0 +1,640 @@
+---
+import '../styles/seventures.css';
+---
+
+<div class="relative min-h-screen w-full overflow-hidden bg-neutral-50 text-neutral-800 font-mono">
+  <div id="tsparticles"></div>
+
+  <div
+    id="cursor"
+    class="fixed w-8 h-8 rounded-full border border-neutral-600 pointer-events-none z-50 opacity-60 mix-blend-difference"
+  >
+  </div>
+
+  <header class="fixed top-0 left-0 w-full p-8 z-40 flex justify-between items-center backdrop-blur-sm bg-neutral-50/30">
+    <div class="text-neutral-700 text-xs tracking-widest uppercase">
+      <span class="text-neutral-500">$</span> samuel_ernest_ventures<span class="text-neutral-600 animate-cursor-blink">_</span>
+    </div>
+    <nav class="hidden md:flex space-x-8">
+      <button data-section="ventures" class="text-xs uppercase tracking-wider transition-colors text-neutral-500 hover:text-neutral-700">
+        ventures
+      </button>
+      <button data-section="positions" class="text-xs uppercase tracking-wider transition-colors text-neutral-500 hover:text-neutral-700">
+        positions
+      </button>
+      <button data-section="philosophy" class="text-xs uppercase tracking-wider transition-colors text-neutral-500 hover:text-neutral-700">
+        philosophy
+      </button>
+    </nav>
+  </header>
+
+  <main class="container mx-auto px-8 pt-32 pb-20">
+    <section class="min-h-[80vh] grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div class="flex flex-col justify-center items-start">
+        <div class="mb-8 text-xs text-neutral-500 font-light">
+          <span class="text-neutral-600">$</span> cat manifesto.txt
+        </div>
+        <h1 class="text-4xl md:text-6xl font-light mb-8 leading-tight tracking-tighter text-neutral-900">
+          SAMUEL
+          <br />
+          ERNEST
+          <br />
+          VENTURES
+        </h1>
+        <p class="text-sm md:text-base text-neutral-600 mb-12 max-w-lg font-light leading-relaxed">
+          We build and partner with visionaries engineering the future through technology.
+          <br />
+          Solving hard problems. Creating impact at scale.
+        </p>
+        <div class="group inline-flex items-center text-xs cursor-pointer border border-neutral-300 px-4 py-2 hover:border-neutral-400 transition-colors">
+          <span class="text-neutral-600 mr-2">$</span>
+          <span class="text-neutral-700 group-hover:text-neutral-800 transition-colors">./connect.sh</span>
+        </div>
+      </div>
+      
+      <div class="p-8 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm shadow-sm rounded-sm h-fit">
+        <div class="mb-4 text-xs text-neutral-500 font-light">
+          <span class="text-neutral-600">$</span> ./chaos_theory.sh
+        </div>
+        
+        <div class="relative chaos-canvas-container">
+          <canvas id="chaosCanvas" class="w-full h-full"></canvas>
+        </div>
+      
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-5xl mx-auto">
+      <section id="ventures" class="min-h-screen flex flex-col justify-center py-20">
+        <div class="mb-12 text-xs text-neutral-500 font-light">
+          <span class="text-neutral-600">$</span> ls -la /ventures
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex items-center mb-3">
+              <div class="w-1 h-1 bg-neutral-600 mr-3 opacity-60"></div>
+              <h3 class="text-sm font-medium tracking-wide text-neutral-800">COMPENDIA</h3>
+            </div>
+            <p class="text-xs text-neutral-600 pl-4 font-light leading-relaxed">
+              Developing a unified, self-organizing knowledge network integrating voice, text, and social presence.  
+            </p>
+          </div>
+          <div class="p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex items-center mb-3">
+              <div class="w-1 h-1 bg-neutral-600 mr-3 opacity-60"></div>
+              <h3 class="text-sm font-medium tracking-wide text-neutral-800">ONECARD</h3>
+            </div>
+            <p class="text-xs text-neutral-600 pl-4 font-light leading-relaxed">
+              Building a financial technology product to transform spending with machine learning.
+            </p>
+          </div>
+          <div class="p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex items-center mb-3">
+              <div class="w-1 h-1 bg-neutral-600 mr-3 opacity-60"></div>
+              <h3 class="text-sm font-medium tracking-wide text-neutral-800">STAT.ARB</h3>
+            </div>
+            <p class="text-xs text-neutral-600 pl-4 font-light leading-relaxed">
+              Engineering mathematical, statistical, and machine learning models in the execution of algorithmic investments.
+            </p>
+          </div>
+          <div class="p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex items-center mb-3">
+              <div class="w-1 h-1 bg-neutral-600 mr-3 opacity-60"></div>
+              <h3 class="text-sm font-medium tracking-wide text-neutral-800">SYLLABUS.WEBSITE</h3>
+            </div>
+            <p class="text-xs text-neutral-600 pl-4 font-light leading-relaxed">
+              Scaling our efficient syllabus sharing platform and database for students nationwide.
+            </p>
+          </div>
+          <div class="p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex items-center mb-3">
+              <div class="w-1 h-1 bg-neutral-600 mr-3 opacity-60"></div>
+              <h3 class="text-sm font-medium tracking-wide text-neutral-800">GLOBAL.CONFLICTS</h3>
+            </div>
+            <p class="text-xs text-neutral-600 pl-4 font-light leading-relaxed">
+              Designing a real-time global conflict map displaying live conflicts, background, and statistics.
+            </p>
+          </div>
+          <div class="p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex items-center mb-3">
+              <div class="w-1 h-1 bg-neutral-600 mr-3 opacity-60"></div>
+              <h3 class="text-sm font-medium tracking-wide text-neutral-800">FARMERS.MARKET</h3>
+            </div>
+            <p class="text-xs text-neutral-600 pl-4 font-light leading-relaxed">
+              Bringing farmers market's and their vendors online in a global and scalable multi-vendor marketplace. 
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="positions" class="min-h-screen flex flex-col justify-center py-20">
+        <div class="mb-12 text-xs text-neutral-500 font-light">
+          <span class="text-neutral-600">$</span> grep -r "hiring" ./positions
+        </div>
+        <div class="space-y-4">
+          <div class="group p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+              <div class="flex items-center mb-2 md:mb-0">
+                <button class="text-neutral-500 mr-3 font-light transform transition-transform duration-200 expand-btn" data-position="tech-partner">&gt;</button>
+                <h3 class="text-sm font-medium tracking-wide text-neutral-800">TECHNICAL PARTNER // CONSUMER PRODUCT</h3>
+              </div>
+              <div class="flex items-center ml-6 md:ml-0">
+                <p class="text-xs text-neutral-600 mr-4">REMOTE</p>
+                <a href="/positions/technical-partner" class="h-3 w-3 text-neutral-500 group-hover:text-neutral-700 transition-colors opacity-0 group-hover:opacity-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="position-description hidden mt-4 pl-6 text-xs text-neutral-600 font-light leading-relaxed" data-position="tech-partner">
+              Lead technical development of consumer-facing products. Strong background in frontend development, user experience, and scalable architecture required. Experience with React, TypeScript, and cloud infrastructure preferred. This is a leadership role.
+              <div class="mt-3">
+                <a href="/positions/technical-partner" class="text-neutral-700 hover:text-neutral-900 transition-colors inline-flex items-center">
+                  View full details
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 ml-1">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="group p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+              <div class="flex items-center mb-2 md:mb-0">
+                <button class="text-neutral-500 mr-3 font-light transform transition-transform duration-200 expand-btn" data-position="swe">&gt;</button>
+                <h3 class="text-sm font-medium tracking-wide text-neutral-800">SOFTWARE ENGINEER // GENERALIST</h3>
+              </div>
+              <div class="flex items-center ml-6 md:ml-0">
+                <p class="text-xs text-neutral-600 mr-4">REMOTE</p>
+                <a href="/positions/software-engineer" class="h-3 w-3 text-neutral-500 group-hover:text-neutral-700 transition-colors opacity-0 group-hover:opacity-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="position-description hidden mt-4 pl-6 text-xs text-neutral-600 font-light leading-relaxed" data-position="swe">
+              Full-stack software engineer with experience across multiple languages and frameworks. Looking for someone who can build products fast and ship them to millions of users even faster.
+              <div class="mt-3">
+                <a href="/positions/software-engineer" class="text-neutral-700 hover:text-neutral-900 transition-colors inline-flex items-center">
+                  View full details
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 ml-1">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="group p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+              <div class="flex items-center mb-2 md:mb-0">
+                <button class="text-neutral-500 mr-3 font-light transform transition-transform duration-200 expand-btn" data-position="venture">&gt;</button>
+                <h3 class="text-sm font-medium tracking-wide text-neutral-800">VENTURE PARTNER // EXECUTIVE TEAM</h3>
+              </div>
+              <div class="flex items-center ml-6 md:ml-0">
+                <p class="text-xs text-neutral-600 mr-4">GLOBAL</p>
+                <a href="/positions/venture-partner" class="h-3 w-3 text-neutral-500 group-hover:text-neutral-700 transition-colors opacity-0 group-hover:opacity-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="position-description hidden mt-4 pl-6 text-xs text-neutral-600 font-light leading-relaxed" data-position="venture">
+              Join our executive team to help identify and nurture the next generation of groundbreaking companies. Strong background in technology, business development, and startup operations required.
+              <div class="mt-3">
+                <a href="/positions/venture-partner" class="text-neutral-700 hover:text-neutral-900 transition-colors inline-flex items-center">
+                  View full details
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 ml-1">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="group p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+              <div class="flex items-center mb-2 md:mb-0">
+                <button class="text-neutral-500 mr-3 font-light transform transition-transform duration-200 expand-btn" data-position="growth">&gt;</button>
+                <h3 class="text-sm font-medium tracking-wide text-neutral-800">GROWTH ENGINEER // MARKETING</h3>
+              </div>
+              <div class="flex items-center ml-6 md:ml-0">
+                <p class="text-xs text-neutral-600 mr-4">REMOTE</p>
+                <a href="/positions/growth-engineer" class="h-3 w-3 text-neutral-500 group-hover:text-neutral-700 transition-colors opacity-0 group-hover:opacity-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="position-description hidden mt-4 pl-6 text-xs text-neutral-600 font-light leading-relaxed" data-position="growth">
+              Drive growth across our portfolio companies through technical marketing initiatives. Experience with analytics, automation, and marketing technologies required.
+              <div class="mt-3">
+                <a href="/positions/growth-engineer" class="text-neutral-700 hover:text-neutral-900 transition-colors inline-flex items-center">
+                  View full details
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 ml-1">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="group p-6 border border-neutral-300 hover:border-neutral-400 transition-all duration-300 bg-neutral-100/70 backdrop-blur-sm">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+              <div class="flex items-center mb-2 md:mb-0">
+                <button class="text-neutral-500 mr-3 font-light transform transition-transform duration-200 expand-btn" data-position="cracked">&gt;</button>
+                <h3 class="text-sm font-medium tracking-wide text-neutral-800">CRACKED // SOMETHING ELSE OR MORE</h3>
+              </div>
+              <div class="flex items-center ml-6 md:ml-0">
+                <p class="text-xs text-neutral-600 mr-4">GLOBAL</p>
+                <a href="/positions/cracked" class="h-3 w-3 text-neutral-500 group-hover:text-neutral-700 transition-colors opacity-0 group-hover:opacity-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="position-description hidden mt-4 pl-6 text-xs text-neutral-600 font-light leading-relaxed" data-position="cracked">
+              Don't see a role that fits? If you're exceptional at what you do and want to help build the future, we want to hear from you.
+              <div class="mt-3">
+                <a href="/positions/cracked" class="text-neutral-700 hover:text-neutral-900 transition-colors inline-flex items-center">
+                  View full details
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 ml-1">
+                    <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 text-xs text-neutral-500 font-light">
+          <span class="text-neutral-600">$</span> git commit -m <span class="text-neutral-700">"build_with_us"</span>
+        </div>
+      </section>
+
+      <section id="about" class="min-h-screen flex flex-col justify-center py-20">
+        <div class="mb-12 text-xs text-neutral-500 font-light">
+          <span class="text-neutral-600">$</span> cat ./about/philosophy.md
+        </div>
+        <div>
+          <h2 class="text-2xl font-light mb-8 text-neutral-800">Our Philosophy</h2>
+          <div class="space-y-6 text-sm text-neutral-600 font-light leading-relaxed">
+            <p>
+              At Samuel Ernest Ventures, we believe that the most significant technological advancements come from
+              solving fundamental challenges in science and engineering.
+            </p>
+            <p>
+              We build with those who are pushing the boundaries of what's possible in everything from consumer products to deep tech.
+            </p>
+            <p>
+              Without builders, society would falter to chaos. 
+            </p>
+            <div class="pt-6 border-t border-neutral-300 mt-8">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <h3 class="text-xs uppercase tracking-wider text-neutral-700 mb-2">Focus Areas</h3>
+                  <ul class="text-xs text-neutral-500 space-y-1">
+                    <li>Consumer Products</li>
+                    <li>Artifical Intelligence</li>
+                    <li>Financial Technology</li>
+                    <li>Astro/Aerodynamics</li>
+                    <li>Software-as-a-Service</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 class="text-xs uppercase tracking-wider text-neutral-700 mb-2">Who we look for</h3>
+                  <ul class="text-xs text-neutral-500 space-y-1">
+                    <li>Engineers</li>
+                    <li>Marketers</li>
+                    <li>Thinkers</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 class="text-xs uppercase tracking-wider text-neutral-700 mb-2">Locations</h3>
+                  <ul class="text-xs text-neutral-500 space-y-1">
+                    <li>New York</li>
+                    <li>San Francisco</li>
+                    <li>Boston</li>
+                    <li>Remote</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="fixed bottom-0 left-0 w-full p-8 z-40 flex justify-between items-center backdrop-blur-sm bg-neutral-50/30">
+    <div class="text-xs text-neutral-500 font-light">
+      <span class="text-neutral-600">root@samuel-ernest:~#</span>
+    </div>
+    <div class="text-xs text-neutral-500 font-light">© <span id="year"></span> Samuel Ernest Ventures</div>
+  </footer>
+</div>
+
+<script>
+  // Get the current year for the footer
+  document.getElementById('year').textContent = new Date().getFullYear().toString();
+
+  // Add MathJax for proper equation rendering
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    // Load MathJax
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+    script.async = true;
+    document.head.appendChild(script);
+    
+    // Rest of the initialization code
+    const cursor = document.getElementById('cursor');
+    
+    document.addEventListener('mousemove', function(e) {
+      cursor.style.left = `${e.clientX - 16}px`;
+      cursor.style.top = `${e.clientY - 16}px`;
+      cursor.style.transition = 'transform 0.1s ease-out, opacity 0.3s ease';
+      cursor.style.transform = 'translate3d(0, 0, 0)';
+    });
+    
+    // Navigation buttons
+    const buttons = document.querySelectorAll('nav button');
+    buttons.forEach(button => {
+      button.addEventListener('click', function() {
+        const section = this.getAttribute('data-section');
+        document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+        
+        // Update active state
+        buttons.forEach(btn => {
+          btn.classList.remove('text-neutral-800');
+          btn.classList.add('text-neutral-500', 'hover:text-neutral-700');
+        });
+        this.classList.remove('text-neutral-500', 'hover:text-neutral-700');
+        this.classList.add('text-neutral-800');
+      });
+    });
+
+    // Initialize Lorenz Attractor visualization
+    const canvas = document.getElementById('chaosCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      
+      // Set canvas dimensions with higher resolution for sharp rendering
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      
+      // Set canvas size to match container
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      
+      // Scale context for retina display
+      ctx.scale(dpr, dpr);
+      
+      // Lorenz attractor parameters
+      const sigma = 10;
+      const rho = 28;
+      const beta = 8/3;
+      const dt = 0.005;
+      
+      // Initial conditions
+      let x = 0.1;
+      let y = 0;
+      let z = 0;
+      
+      // Adjust scaling to fit within canvas bounds with padding
+      const padding = 40; // Add padding to prevent cutting off
+      const maxLorenzExtent = 30; // Approximate maximum extent of Lorenz attractor
+      const scale = (Math.min(rect.width, rect.height) - padding) / (2 * maxLorenzExtent);
+      const translateX = rect.width / 2;
+      const translateY = rect.height / 2;
+      
+      // Colors and styling
+      ctx.lineWidth = 0.75;
+      ctx.strokeStyle = '#5a5a5a';
+      
+      // Previous point for line drawing
+      let prevX = x;
+      let prevY = y;
+      
+      // Start with a clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Start the path
+      ctx.beginPath();
+      ctx.moveTo(translateX + (x * scale), translateY - (y * scale));
+      
+      // Initialize and start animation
+      let frameCount = 0;
+      
+      function animate() {
+        // Calculate next points in the Lorenz system (10 iterations per frame)
+        for (let i = 0; i < 10; i++) {
+          // Store previous values
+          prevX = x;
+          prevY = y;
+          
+          // Calculate next point using Lorenz equations
+          const dx_val = sigma * (y - x) * dt;
+          const dy_val = (x * (rho - z) - y) * dt;
+          const dz_val = (x * y - beta * z) * dt;
+          
+          x += dx_val;
+          y += dy_val;
+          z += dz_val;
+          
+          // Draw line from previous to current point
+          ctx.beginPath();
+          ctx.moveTo(translateX + (prevX * scale), translateY - (prevY * scale));
+          ctx.lineTo(translateX + (x * scale), translateY - (y * scale));
+          ctx.stroke();
+        }
+        
+        frameCount++;
+        
+        // Clear canvas and restart after 3000 frames or if the pattern gets too large
+        if (frameCount > 3000 || Math.abs(x) > 100 || Math.abs(y) > 100) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          x = 0.1 * (Math.random() - 0.5); // Slightly different initial condition
+          y = 0;
+          z = 0;
+          frameCount = 0;
+        }
+        
+        requestAnimationFrame(animate);
+      }
+      
+      // Start the animation
+      animate();
+    }
+  });
+
+  // Initialize tsParticles
+  document.addEventListener('DOMContentLoaded', async function() {
+    try {
+      // Dynamically load tsparticles
+      const tsParticles = await import('tsparticles-slim');
+      
+      await tsParticles.loadSlim(tsParticles.tsParticles);
+      
+      await tsParticles.tsParticles.load("tsparticles", {
+        background: {
+          color: {
+            value: "#f5f5f5",
+          },
+        },
+        fpsLimit: 120,
+        interactivity: {
+          events: {
+            onHover: {
+              enable: true,
+              mode: "grab",
+            },
+            onClick: {
+              enable: true,
+              mode: "push",
+            },
+          },
+          modes: {
+            grab: {
+              distance: 140,
+              links: {
+                opacity: 0.2,
+              },
+            },
+            push: {
+              quantity: 2,
+            },
+          },
+        },
+        particles: {
+          color: {
+            value: "#5a5a5a",
+          },
+          links: {
+            color: "#5a5a5a",
+            distance: 150,
+            enable: true,
+            opacity: 0.1,
+            width: 0.5,
+          },
+          move: {
+            direction: "none",
+            enable: true,
+            outModes: {
+              default: "out",
+            },
+            random: true,
+            speed: 0.8,
+            straight: false,
+          },
+          number: {
+            density: {
+              enable: true,
+              area: 1000,
+            },
+            value: 60,
+          },
+          opacity: {
+            value: 0.2,
+          },
+          shape: {
+            type: "circle",
+          },
+          size: {
+            value: { min: 0.5, max: 1.5 },
+          },
+        },
+        detectRetina: true,
+      });
+    } catch (error) {
+      console.error("Failed to load particles:", error);
+    }
+  });
+
+  // Position description expansion
+  document.addEventListener('DOMContentLoaded', function() {
+    const expandButtons = document.querySelectorAll('.expand-btn');
+    
+    expandButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const positionId = this.getAttribute('data-position');
+        const description = document.querySelector(`.position-description[data-position="${positionId}"]`);
+        
+        // Toggle button rotation
+        this.classList.toggle('expanded');
+        
+        // Toggle description visibility
+        description.classList.toggle('expanded');
+        description.classList.toggle('hidden');
+        
+        // Set appropriate max-height when expanded
+        if (description.classList.contains('expanded')) {
+          description.style.maxHeight = description.scrollHeight + 'px';
+        } else {
+          description.style.maxHeight = '0';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .chaos-canvas-container {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  #chaosCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes cursor-blink {
+    0%, 49% {
+      opacity: 1;
+    }
+    50%, 100% {
+      opacity: 0;
+    }
+  }
+
+  .animate-cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  .expand-btn.expanded {
+    transform: rotate(90deg);
+  }
+
+  .position-description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.2s ease-out, margin 0.2s ease-out;
+    opacity: 0;
+  }
+
+  .position-description.expanded {
+    max-height: 200px;
+    opacity: 1;
+  }
+</style>

@@ -18,7 +18,7 @@ const { class: className } = Astro.props
             aria-label={name}
             class='key'
             data-key={name}
-            target='_blank'
+            target={href.startsWith('http') || href.startsWith('mailto') ? '_blank' : '_self'}
             {...{ href }}
           >
             <Icon />

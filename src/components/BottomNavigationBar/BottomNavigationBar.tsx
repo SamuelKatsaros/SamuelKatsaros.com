@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
-import { Bookmarks } from '../icons/Bookmarks'
+import { CreditCard } from '../icons/CreditCard'
 import { Briefcase } from '../icons/Briefcase'
 import { ChatTeardropDots } from '../icons/ChatTeardrop'
-import { HandPalm } from '../icons/HandPalm'
+import { Scroll } from '../icons/Scroll'
 import { HandWaving } from '../icons/HandWaving'
 import { Dock, DockIcon } from '../ui/dock'
 import useScrollHandler from './useScrollHandler'
@@ -30,14 +30,14 @@ export const bottomNavigationItems = [
     href: '/blog'
   },
   {
-    name: 'About',
-    icon: HandPalm,
-    href: '/about'
+    name: 'Resume',
+    icon: Scroll,
+    href: '/resume'
   },
   {
-    name: 'Bookmarks',
-    icon: Bookmarks,
-    href: '/bookmarks'
+    name: 'OneCard',
+    icon: CreditCard,
+    href: 'https://onecardai.com'
   }
 ]
 
