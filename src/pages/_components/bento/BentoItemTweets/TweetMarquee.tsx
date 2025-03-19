@@ -14,7 +14,7 @@ const tweets: Tweet[] = [
   },
   {
     id: '2',
-    text: "GMAT prep going strong! 📚 Quantitative reasoning is becoming second nature.",
+    text: "📚 Quantitative reasoning is becoming second nature.",
     author: {
       name: 'Samuel Katsaros',
       username: '@SamuelKatsaros',
